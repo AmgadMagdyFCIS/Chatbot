@@ -10,6 +10,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //osus
+        //ToDo
+        // - create login page
+        // - create signup page
+        // - create splash screen
+        // - create main page
+        // - create navigation drawer
     }
 }
