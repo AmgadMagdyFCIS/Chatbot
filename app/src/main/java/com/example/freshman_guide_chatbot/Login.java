@@ -96,7 +96,6 @@ public class Login extends AppCompatActivity {
                 }
             });
         }
-
     }
 
     private boolean isEmail(String email)
