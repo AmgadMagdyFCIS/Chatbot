@@ -86,7 +86,6 @@ public class Login extends AppCompatActivity {
                         startActivity(intent);
                         Toast.makeText(getApplication(),"successful Login",Toast.LENGTH_LONG).show();
 
-
                     }
                     else
                     {
