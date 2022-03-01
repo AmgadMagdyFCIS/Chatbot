@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
 
 public class Sign_Up extends AppCompatActivity
 {
@@ -72,6 +73,19 @@ public class Sign_Up extends AppCompatActivity
         String strEmail=email.getText().toString();
         String strPassword=password.getText().toString();
         String strConPassword=confirmPassword.getText().toString();
+
+        fbAuth.fetchSignInMethodsForEmail(strEmail).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+            @Override
+            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                boolean isNewUser = task.getResult().getSignInMethods().isEmpty();
+
+                if (!isNewUser)
+                    Toast.makeText(getApplication(),"email already exists",Toast.LENGTH_LONG).show();
+
+
+            }
+        });
+
         if(!isEmail(strEmail))
             email.setError("Please enter a valid email");
         else if(strPassword.isEmpty()||strPassword.length()<6)
@@ -99,7 +113,7 @@ public class Sign_Up extends AppCompatActivity
                             }
                         });
                         progressDialog.dismiss();
-                        Intent intent=new Intent(getApplication(),Login.class);
+                        Intent intent=new Intent(getApplication(),MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         Toast.makeText(getApplication(),"successful Registration",Toast.LENGTH_LONG).show();
@@ -107,7 +121,7 @@ public class Sign_Up extends AppCompatActivity
                     else
                     {
                         progressDialog.dismiss();
-                        Toast.makeText(getApplication(),""+task.getException(),Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplication(),"Unexpected Error",Toast.LENGTH_LONG).show();
                     }
 
                 }
