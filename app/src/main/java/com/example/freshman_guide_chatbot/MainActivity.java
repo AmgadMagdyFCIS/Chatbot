@@ -2,7 +2,9 @@ package com.example.freshman_guide_chatbot;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,11 +12,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //ToDo
-        // - create login page
-        // - create signup page
-        // - create splash screen
-        // - create main page
-        // - create navigation drawer
+
+
     }
 }
