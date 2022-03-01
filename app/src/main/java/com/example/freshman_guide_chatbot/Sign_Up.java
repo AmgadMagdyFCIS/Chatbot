@@ -72,6 +72,7 @@ public class Sign_Up extends AppCompatActivity
         String strEmail=email.getText().toString();
         String strPassword=password.getText().toString();
         String strConPassword=confirmPassword.getText().toString();
+
         if(!isEmail(strEmail))
             email.setError("Please enter a valid email");
         else if(strPassword.isEmpty()||strPassword.length()<6)
