@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class Login extends AppCompatActivity {
     TextView createAccount;
     EditText email, password, confirmPassword;
     Button btn_login;
+    ImageView SignInWithGoogle ,SignInWithOutlook;
     ProgressDialog progressDialog;
     FirebaseAuth fbAuth;
     FirebaseUser fbUser;
@@ -37,6 +39,8 @@ public class Login extends AppCompatActivity {
         email = findViewById(R.id.InputEmail);
         password = findViewById(R.id.InputPassword);
         btn_login = findViewById(R.id.btn_Login);
+        SignInWithGoogle=findViewById(R.id.btn_google);
+        SignInWithOutlook=findViewById(R.id.btn_outlook);
         progressDialog = new ProgressDialog(this);
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
@@ -49,12 +53,28 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+
                 LogIn();
             }
         });
+
+
+        SignInWithGoogle.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getApplication(), SignInWithGoogle.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void LogIn() {
