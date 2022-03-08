@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,22 +22,36 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
-    TextView createAccount;
-    EditText email, password, confirmPassword;
+    TextView createAccount,forgetPassword;
+    EditText email, password;
     Button btn_login;
     ProgressDialog progressDialog;
     FirebaseAuth fbAuth;
     FirebaseUser fbUser;
 
+    String _email="";
+    String _pass="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
 
         createAccount = findViewById(R.id.createNewAcc);
+
         email = findViewById(R.id.InputEmail);
         password = findViewById(R.id.InputPassword);
+        if(getIntent()!=null&&getIntent().getExtras()!=null) {
+            _email = getIntent().getExtras().getString("email", "");
+            _pass = getIntent().getExtras().getString("password", "");
+            email.setText(_email);
+            password.setText(_pass);
+        }
+
         btn_login = findViewById(R.id.btn_Login);
+        forgetPassword=findViewById(R.id.forgotpassword);
         progressDialog = new ProgressDialog(this);
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
@@ -46,6 +61,14 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplication(), Sign_Up.class);
                 startActivity(intent);
+            }
+        });
+
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getApplication(),ForgetPassword.class);
+                startActivity(i);
             }
         });
 
@@ -81,11 +104,14 @@ public class Login extends AppCompatActivity {
                     if(task.isSuccessful())
                     {
                         progressDialog.dismiss();
-                        Intent intent=new Intent(getApplication(),MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        Toast.makeText(getApplication(),"successful Login",Toast.LENGTH_LONG).show();
-
+                        if(fbUser.isEmailVerified()) {
+                            Intent intent = new Intent(getApplication(), MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            Toast.makeText(getApplication(), "successful Login", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                            Toast.makeText(getApplication(), "please verify ur email", Toast.LENGTH_LONG).show();
                     }
                     else
                     {
