@@ -8,9 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.chaquo.python.PyObject;
+/*import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;
+import com.chaquo.python.android.AndroidPlatform;*/
 
 public class MainActivity extends AppCompatActivity
 {
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView hello = findViewById(R.id.hello);
+        /*TextView hello = findViewById(R.id.hello);
 
         // create python if not started
         if(!Python.isStarted())
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         PyObject obj = python_module.callAttr("main");
 
         // set text of textview to text returned from main function in the hello script
-        hello.setText(obj.toString());
+        hello.setText(obj.toString());*/
 
     }
 

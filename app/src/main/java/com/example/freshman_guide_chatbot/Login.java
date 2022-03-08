@@ -22,13 +22,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
-    TextView createAccount;
-    EditText email, password, confirmPassword;
+    TextView createAccount ,forgetPassword;
+    EditText email, password;
     Button btn_login;
     ImageView SignInWithGoogle ,SignInWithOutlook;
     ProgressDialog progressDialog;
     FirebaseAuth fbAuth;
     FirebaseUser fbUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         createAccount = findViewById(R.id.createNewAcc);
+        forgetPassword=findViewById(R.id.forgotpassword);
         email = findViewById(R.id.InputEmail);
         password = findViewById(R.id.InputPassword);
         btn_login = findViewById(R.id.btn_Login);
@@ -45,6 +47,19 @@ public class Login extends AppCompatActivity {
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
 
+
+        if(getIntent()!=null&&getIntent().getExtras()!=null)
+        {
+            email.setText(getIntent().getExtras().getString("email",""));
+            password.setText(getIntent().getExtras().getString("password",""));
+        }
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getApplication(),ForgetPassword.class);
+                startActivity(i);
+            }
+        });
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,8 +84,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getApplication(), SignInWithGoogle.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getApplication(), SignInWithGoogle.class);
+                //startActivity(intent);
             }
         });
 
