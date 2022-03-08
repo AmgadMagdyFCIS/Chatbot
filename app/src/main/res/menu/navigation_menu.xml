@@ -5,7 +5,7 @@
         android:id="@+id/collage_info"
         android:icon="@drawable/ic_baseline_info_24"
         android:title="More Information"
-        android:iconTint="@color/light"/>
+        android:iconTint="@color/light" />
     <item
         android:id="@+id/guide"
         android:icon="@drawable/ic_baseline_help_outline_24"
