@@ -8,9 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,36 +22,25 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
-    TextView createAccount,forgetPassword;
-    EditText email, password;
+    TextView createAccount;
+    EditText email, password, confirmPassword;
     Button btn_login;
+    ImageView SignInWithGoogle ,SignInWithOutlook;
     ProgressDialog progressDialog;
     FirebaseAuth fbAuth;
     FirebaseUser fbUser;
 
-    String _email="";
-    String _pass="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
 
         createAccount = findViewById(R.id.createNewAcc);
-
         email = findViewById(R.id.InputEmail);
         password = findViewById(R.id.InputPassword);
-        if(getIntent()!=null&&getIntent().getExtras()!=null) {
-            _email = getIntent().getExtras().getString("email", "");
-            _pass = getIntent().getExtras().getString("password", "");
-            email.setText(_email);
-            password.setText(_pass);
-        }
-
         btn_login = findViewById(R.id.btn_Login);
-        forgetPassword=findViewById(R.id.forgotpassword);
+        SignInWithGoogle=findViewById(R.id.btn_google);
+        SignInWithOutlook=findViewById(R.id.btn_outlook);
         progressDialog = new ProgressDialog(this);
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
@@ -64,20 +53,28 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        forgetPassword.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                Intent i=new Intent(getApplication(),ForgetPassword.class);
-                startActivity(i);
-            }
-        });
+            public void onClick(View v)
+            {
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 LogIn();
             }
         });
+
+
+        SignInWithGoogle.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getApplication(), SignInWithGoogle.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     private void LogIn() {
@@ -104,14 +101,11 @@ public class Login extends AppCompatActivity {
                     if(task.isSuccessful())
                     {
                         progressDialog.dismiss();
-                        if(fbUser.isEmailVerified()) {
-                            Intent intent = new Intent(getApplication(), MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            Toast.makeText(getApplication(), "successful Login", Toast.LENGTH_LONG).show();
-                        }
-                        else
-                            Toast.makeText(getApplication(), "please verify ur email", Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(getApplication(),MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        Toast.makeText(getApplication(),"successful Login",Toast.LENGTH_LONG).show();
+
                     }
                     else
                     {

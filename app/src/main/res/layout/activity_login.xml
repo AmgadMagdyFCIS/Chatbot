@@ -8,7 +8,7 @@
     android:background="@drawable/what_is_chatbot">
 
     <ImageView
-        android:id="@+id/image_View"
+        android:id="@+id/background_image_View"
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -153,7 +153,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/createNewAcc" />
 
             <ImageView
-                android:id="@+id/btngoogle"
+                android:id="@+id/btn_google"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="140dp"
@@ -163,10 +163,9 @@
                 app:srcCompat="@drawable/google_logo" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/btn_outlook"
                 android:layout_width="84dp"
                 android:layout_height="78dp"
-
                 android:layout_marginEnd="125dp"
                 android:layout_marginBottom="314dp"
                 app:layout_constraintBottom_toBottomOf="parent"
