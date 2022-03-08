@@ -35,7 +35,7 @@ public class SignInWithGoogle extends Login
         super.onCreate(savedInstanceState);
         // Configure Google Sign In
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Google Sign In...");
+        progressDialog.setMessage("Google Sign In..");
         progressDialog.show();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -44,13 +44,10 @@ public class SignInWithGoogle extends Login
                 .build();
         mAuth= FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
-
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-
-
 
     }
     @Override
