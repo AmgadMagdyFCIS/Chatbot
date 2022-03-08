@@ -105,7 +105,7 @@ public class SignInWithGoogle extends Login
 
     private void updateUI(Object o)
     {
-        Intent intent = new Intent(getApplication(),MainActivity.class);
+        Intent intent = new Intent(getApplication(),NavigationActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

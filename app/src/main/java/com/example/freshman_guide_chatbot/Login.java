@@ -115,7 +115,7 @@ public class Login extends AppCompatActivity {
                     if(task.isSuccessful())
                     {
                         progressDialog.dismiss();
-                        Intent intent=new Intent(getApplication(),MainActivity.class);
+                        Intent intent=new Intent(getApplication(),NavigationActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         Toast.makeText(getApplication(),"successful Login",Toast.LENGTH_LONG).show();
