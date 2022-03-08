@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getApplication(), MainActivity.class);
+                Intent intent = new Intent(getApplication(), SignInWithGoogle.class);
                 startActivity(intent);
             }
         });

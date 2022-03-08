@@ -23,7 +23,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class SignInWithGoogle extends Login
 {
-    private static final int RC_SIGN_IN =101;
+    private static final int RC_SIGN_IN = 101;
     GoogleSignInClient mGoogleSignInClient;
     FirebaseUser mUser;
     FirebaseAuth mAuth;
@@ -50,9 +50,6 @@ public class SignInWithGoogle extends Login
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
 
-
-
-
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -60,14 +57,18 @@ public class SignInWithGoogle extends Login
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == RC_SIGN_IN)
+        {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
+            try
+            {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-
                 firebaseAuthWithGoogle(account.getIdToken());
-            } catch (ApiException e) {
+
+            }
+            catch (ApiException e)
+            {
                 // Google Sign In failed, update UI appropriately
                 Toast.makeText(this, ""+e.getMessage(),Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
@@ -79,19 +80,23 @@ public class SignInWithGoogle extends Login
     {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+                {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                    public void onComplete(@NonNull Task<AuthResult> task)
+                    {
                         if (task.isSuccessful())
                         {
-                            // Sign in success, update UI with the signed-in user's informatio
+                            // Sign in success, update UI with the signed-in user's information
                             progressDialog.dismiss();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                        } else {
+                        }
+                        else
+                        {
                             // If sign in fails, display a message to the user.
                             progressDialog.dismiss();
-                            Toast.makeText(SignInWithGoogle.this,""+task.getException(),Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(SignInWithGoogle.this,""+task.getException(),Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
