@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
     TextView createAccount ,forgetPassword;
     EditText email, password;
     Button btn_login;
-    ImageView SignInWithGoogle ,SignInWithOutlook;
+    ImageView SignInWithGoogle ;
     ProgressDialog progressDialog;
     FirebaseAuth fbAuth;
     FirebaseUser fbUser;
@@ -42,7 +42,6 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.InputPassword);
         btn_login = findViewById(R.id.btn_Login);
         SignInWithGoogle=findViewById(R.id.btn_google);
-        SignInWithOutlook=findViewById(R.id.btn_outlook);
         progressDialog = new ProgressDialog(this);
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
@@ -84,7 +83,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getApplication(), SignInWithGoogle.class);
+                Intent intent = new Intent(getApplication(), MainActivity.class);
                 startActivity(intent);
             }
         });
