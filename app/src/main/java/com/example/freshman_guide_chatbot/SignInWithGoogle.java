@@ -93,7 +93,6 @@ public class SignInWithGoogle extends Login
                     }
                 });
     }
-
     private void updateUI(FirebaseUser user)
     {
         Intent intent=new Intent(getApplication(),MainActivity.class);
