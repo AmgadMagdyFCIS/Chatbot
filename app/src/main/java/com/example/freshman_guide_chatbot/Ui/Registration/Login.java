@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -35,7 +36,8 @@ public class Login extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -52,50 +54,61 @@ public class Login extends AppCompatActivity {
         fbUser = fbAuth.getCurrentUser();
 
 
-        if(getIntent()!=null&&getIntent().getExtras()!=null)
+        if(fbUser!=null)
         {
-            email.setText(getIntent().getExtras().getString("email",""));
-            password.setText(getIntent().getExtras().getString("password",""));
+            Intent intent = new Intent(getApplication(),NavigationActivity.class);
+           // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+
+        }
+        else
+        {
+            if(getIntent()!=null&&getIntent().getExtras()!=null)
+            {
+                email.setText(getIntent().getExtras().getString("email",""));
+                password.setText(getIntent().getExtras().getString("password",""));
+            }
+
+            forgetPassword.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v) {
+                    Intent i=new Intent(getApplication(),ForgetPassword.class);
+                    startActivity(i);
+                }
+            });
+            createAccount.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(getApplication(), Sign_Up.class);
+                    startActivity(intent);
+                }
+            });
+
+            btn_login.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+
+                    LogIn();
+                }
+            });
+
+
+            SignInWithGoogle.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(getApplication(), SignInWithGoogle.class);
+                    startActivity(intent);
+                }
+            });
         }
 
-        forgetPassword.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(getApplication(),ForgetPassword.class);
-                startActivity(i);
-            }
-        });
-        createAccount.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(getApplication(), Sign_Up.class);
-                startActivity(intent);
-            }
-        });
-
-        btn_login.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-
-                LogIn();
-            }
-        });
-
-
-        SignInWithGoogle.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(getApplication(), SignInWithGoogle.class);
-                startActivity(intent);
-            }
-        });
 
 
     }
@@ -105,6 +118,7 @@ public class Login extends AppCompatActivity {
 
         String strEmail = email.getText().toString();
         String strPassword = password.getText().toString();
+
 
         if (!isEmail(strEmail))
             email.setError("Please enter a valid email");

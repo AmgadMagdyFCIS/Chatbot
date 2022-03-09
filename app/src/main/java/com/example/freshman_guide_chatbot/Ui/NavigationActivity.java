@@ -76,7 +76,6 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
             case R.id.about_us:
                 return true;
             case R.id.log_out:
-
                 SignOut();
                 return true;
 
@@ -94,9 +93,10 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         GoogleClient = GoogleSignIn.getClient(this,gso);
         GoogleClient.signOut();
         mAuth.signOut();
-       Intent intent = new Intent(getApplication(), Login.class);
+        Intent intent = new Intent(getApplication(), Login.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+
 
     }
 
