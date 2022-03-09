@@ -3,12 +3,15 @@ package com.example.freshman_guide_chatbot;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -37,6 +40,25 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
+        drawerLayout.closeDrawer(GravityCompat.START);
+        switch (item.getItemId()) {
+            case R.id.collage_info:
+                return true;
+
+            case R.id.guide:
+                return true;
+
+            case R.id.settings:
+
+                return true;
+
+            case R.id.about_us:
+                return true;
+            case R.id.log_out:
+                //logout
+                return true;
+
+        }
+        return true;
     }
 }
