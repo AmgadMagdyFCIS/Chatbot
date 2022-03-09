@@ -1,4 +1,4 @@
-package com.example.freshman_guide_chatbot;
+package com.example.freshman_guide_chatbot.Ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,8 +12,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.Toast;
 
+import com.example.freshman_guide_chatbot.R;
+import com.example.freshman_guide_chatbot.Ui.Registration.Login;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -93,7 +94,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         GoogleClient = GoogleSignIn.getClient(this,gso);
         GoogleClient.signOut();
         mAuth.signOut();
-       Intent intent = new Intent(getApplication(),Login.class);
+       Intent intent = new Intent(getApplication(), Login.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 

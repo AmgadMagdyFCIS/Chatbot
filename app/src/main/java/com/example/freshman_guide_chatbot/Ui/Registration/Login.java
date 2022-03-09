@@ -1,4 +1,4 @@
-package com.example.freshman_guide_chatbot;
+package com.example.freshman_guide_chatbot.Ui.Registration;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.freshman_guide_chatbot.R;
+import com.example.freshman_guide_chatbot.Ui.NavigationActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -123,7 +125,7 @@ public class Login extends AppCompatActivity {
                     if(task.isSuccessful())
                     {
                         progressDialog.dismiss();
-                        Intent intent=new Intent(getApplication(),NavigationActivity.class);
+                        Intent intent=new Intent(getApplication(), NavigationActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         Toast.makeText(getApplication(),"successful Login",Toast.LENGTH_LONG).show();

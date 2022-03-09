@@ -1,13 +1,14 @@
-package com.example.freshman_guide_chatbot;
+package com.example.freshman_guide_chatbot.Ui.Registration;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.freshman_guide_chatbot.R;
+import com.example.freshman_guide_chatbot.Ui.NavigationActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -106,7 +107,7 @@ public class SignInWithGoogle extends Login
 
     private void updateUI(Object o)
     {
-        Intent intent = new Intent(getApplication(),NavigationActivity.class);
+        Intent intent = new Intent(getApplication(), NavigationActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

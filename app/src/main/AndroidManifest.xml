@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Freshman_guide_chatbot">
         <activity
-            android:name=".NavigationActivity"
+            android:name=".Ui.NavigationActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInWithGoogle"
+            android:name=".Ui.Registration.SignInWithGoogle"
             android:exported="false" />
         <activity
-            android:name=".ForgetPassword"
+            android:name=".Ui.Registration.ForgetPassword"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".Ui.Registration.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,10 +28,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Sign_Up"
+            android:name=".Ui.Registration.Sign_Up"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Ui.MainActivity"
             android:exported="false" />
 
         <meta-data

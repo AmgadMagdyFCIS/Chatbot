@@ -1,4 +1,4 @@
-package com.example.freshman_guide_chatbot;
+package com.example.freshman_guide_chatbot.Ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.freshman_guide_chatbot.R;
 
 /*import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
