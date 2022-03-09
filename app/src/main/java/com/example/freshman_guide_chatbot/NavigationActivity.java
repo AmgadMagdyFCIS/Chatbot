@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -38,6 +39,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.nav);
         navigationView.setNavigationItemSelectedListener(this);
@@ -49,7 +52,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
