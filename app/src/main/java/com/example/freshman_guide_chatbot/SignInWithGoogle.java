@@ -91,6 +91,7 @@ public class SignInWithGoogle extends Login
                             progressDialog.dismiss();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            finish();
                         }
                         else
                         {

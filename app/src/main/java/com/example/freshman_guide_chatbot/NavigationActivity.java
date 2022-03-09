@@ -13,22 +13,37 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+{
 
     ActionBarDrawerToggle actionBarDrawerToggle;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+    FirebaseAuth mAuth;
+    FirebaseUser mUser;
+    GoogleSignInClient GoogleClient;
+    private static final int RC_SIGN_IN = 101;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.nav);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        mUser= mAuth.getCurrentUser();
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -39,9 +54,11 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
         drawerLayout.closeDrawer(GravityCompat.START);
-        switch (item.getItemId()) {
+        switch (item.getItemId())
+        {
             case R.id.collage_info:
                 return true;
 
@@ -55,10 +72,28 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
             case R.id.about_us:
                 return true;
             case R.id.log_out:
-                //logout
+
+                SignOut();
                 return true;
 
         }
         return true;
     }
+
+    private void SignOut()
+    {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        GoogleClient = GoogleSignIn.getClient(this,gso);
+        GoogleClient.signOut();
+        mAuth.signOut();
+       Intent intent = new Intent(getApplication(),Login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+    }
+
 }

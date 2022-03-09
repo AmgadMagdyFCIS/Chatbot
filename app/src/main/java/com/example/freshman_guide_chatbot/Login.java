@@ -52,16 +52,20 @@ public class Login extends AppCompatActivity {
             email.setText(getIntent().getExtras().getString("email",""));
             password.setText(getIntent().getExtras().getString("password",""));
         }
-        forgetPassword.setOnClickListener(new View.OnClickListener() {
+
+        forgetPassword.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(getApplication(),ForgetPassword.class);
                 startActivity(i);
             }
         });
-        createAccount.setOnClickListener(new View.OnClickListener() {
+        createAccount.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent intent = new Intent(getApplication(), Sign_Up.class);
                 startActivity(intent);
             }
@@ -91,7 +95,8 @@ public class Login extends AppCompatActivity {
 
     }
 
-    private void LogIn() {
+    private void LogIn()
+    {
 
         String strEmail = email.getText().toString();
         String strPassword = password.getText().toString();

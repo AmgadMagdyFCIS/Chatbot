@@ -35,9 +35,11 @@ public class ForgetPassword extends AppCompatActivity {
 
         email=findViewById(R.id.email);
         resetPassword=findViewById(R.id.btn_reset_password);
-        resetPassword.setOnClickListener(new View.OnClickListener() {
+        resetPassword.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 if(email.getText().toString().equals(""))
                     Toast.makeText(getApplication(),"Please enter ur email",Toast.LENGTH_LONG).show();
                 else
@@ -46,9 +48,11 @@ public class ForgetPassword extends AppCompatActivity {
                     progressDialog.setTitle("Reset Password");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
-                    fbAuth.sendPasswordResetEmail(email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    fbAuth.sendPasswordResetEmail(email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>()
+                    {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
+                        public void onComplete(@NonNull Task<Void> task)
+                        {
                             if (task.isSuccessful())
                                 Toast.makeText(getApplication(), "check ur email", Toast.LENGTH_LONG).show();
 
