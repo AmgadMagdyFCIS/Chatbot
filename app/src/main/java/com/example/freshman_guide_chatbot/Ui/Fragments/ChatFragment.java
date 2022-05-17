@@ -36,7 +36,7 @@ public class ChatFragment extends Fragment {
         send=view.findViewById(R.id.button_chat_send);
 
         messageList=new ArrayList<>();
-        message=new Message("hi","bot");
+        message=new Message("اهلا","bot");
         messageList.add(message);
 
 
