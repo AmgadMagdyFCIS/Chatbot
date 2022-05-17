@@ -7,6 +7,7 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.freshman_guide_chatbot.R;
+import com.example.freshman_guide_chatbot.Ui.Registration.Login;
 
 public class SplashScreen extends AppCompatActivity
 {
@@ -17,7 +18,7 @@ public class SplashScreen extends AppCompatActivity
             @Override
             public void run()
             {
-                startActivity( new Intent(SplashScreen.this, MainActivity.class));
+                startActivity( new Intent(SplashScreen.this, Login.class));
                 finish();
 
 

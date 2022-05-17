@@ -3,15 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/FCIS/Chatbot/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.2555" />
+        <entry key="..\:/FCIS/Chatbot/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.2555" />
         <entry key="..\:/FCIS/Chatbot/app/src/main/res/layout/activity_forget_password.xml" value="0.25" />
         <entry key="..\:/FCIS/Chatbot/app/src/main/res/layout/activity_login.xml" value="0.2359375" />
         <entry key="..\:/FCIS/Chatbot/app/src/main/res/layout/activity_main.xml" value="0.10989583333333333" />
         <entry key="..\:/FCIS/Chatbot/app/src/main/res/layout/activity_sign_in_with_google.xml" value="0.10989583333333333" />
         <entry key="..\:/FCIS/Chatbot/app/src/main/res/layout/activity_sign_up.xml" value="0.12158054711246201" />
+        <entry key="..\:/FCIS/Chatbot/app/src/main/res/layout/bot_query.xml" value="0.25" />
+        <entry key="..\:/FCIS/Chatbot/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
+        <entry key="..\:/FCIS/Chatbot/app/src/main/res/layout/user_query.xml" value="0.25" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/Chatbot/app/src/main/res/drawable/email.xml" value="0.17" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/Chatbot/app/src/main/res/drawable/input_bg.xml" value="0.178" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/Chatbot/app/src/main/res/drawable/password.xml" value="0.17" />
-        <entry key="..\:/Users/dell/AndroidStudioProjects/Chatbot/app/src/main/res/drawable/splashscreenbgr.xml" value="0.158" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/Chatbot/app/src/main/res/layout/activity_forget_password.xml" value="0.24365942028985507" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/Chatbot/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/Chatbot/app/src/main/res/layout/activity_main.xml" value="0.2" />
