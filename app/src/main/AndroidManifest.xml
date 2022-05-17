@@ -9,8 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Freshman_guide_chatbot">
+
+        <activity
+            android:name=".Ui.SplashScreen"
+            android:exported="true"
+            android:theme="@style/SplashScreen"/>
+
         <activity
             android:name=".Ui.NavigationActivity"
+            android:theme="@style/SplashScreen"/>
             android:exported="false" />
         <activity
             android:name=".Ui.Registration.SignInWithGoogle"
@@ -27,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Ui.Registration.Sign_Up"
             android:exported="false" />

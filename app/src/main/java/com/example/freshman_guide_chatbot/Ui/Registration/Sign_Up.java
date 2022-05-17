@@ -36,6 +36,9 @@ public class Sign_Up extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        setTheme(R.style.SplashScreen);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
