@@ -2,7 +2,23 @@
     <string name="app_name">Freshman_guide_chatbot</string>
     <string name="open">open</string>
     <string name="close">close</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+   <string name="paragraph">an egyptian faculty that is interested in technologies with its all forms and types and it became the most important faculties in egypt nowadays, the study in it began in September 1996.
+It Provides the highest level of education in computer science, information systems, scientific calculations, and computer systems for its graduates, and prepare them for the changing needs of the community,
+and push them to the relevant areas including business administration.
+\n
+College seeks to provide the best environment to encourage creativity and excellence and moral obligation.
+Faculty of Computer and Information Sciences, Ain Shams University is unique to have 5 distinct programs for Thanawya Amma students under the auspices of Dr.Mahmoud EL Mateni , President of the university , supervised by Dr.Nagwa Badr ,Dean of the faculty and Dr. Rasha Ismail ,Director of the programs.
+\n
+Faculty of computer and information sciences announces it's distinct programs by credit hours system:\n
+        <b>- Software Engineering</b>
+        <b>- Artificial Intelligence</b>
+        <b>- Cyber Security</b>
+        <b>- Digital multi media</b>\n
+Faculty of computer and information sciences also provides Bioinformatics program which accepts Thanawya Amma science section.
+
+
+    </string>
+    <string name="faculty_of_computer_science_is">Faculty Of Computer Science is :</string>
+    <string name="what_is_computer_science">What is computer science?</string>
 
 </resources>

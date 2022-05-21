@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -15,6 +16,7 @@ import android.view.WindowManager;
 
 import com.example.freshman_guide_chatbot.R;
 import com.example.freshman_guide_chatbot.Ui.Fragments.ChatFragment;
+import com.example.freshman_guide_chatbot.Ui.Fragments.InformationFragment;
 import com.example.freshman_guide_chatbot.Ui.Registration.Login;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -71,6 +73,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         switch (item.getItemId())
         {
             case R.id.collage_info:
+                Information();
                 return true;
 
             case R.id.guide:
@@ -90,6 +93,17 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         return true;
     }
 
+    private void Information()
+    {
+
+
+        Intent intent = new Intent(getApplication(), InformationFragment.class);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
+
+
+    }
     private void SignOut()
     {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

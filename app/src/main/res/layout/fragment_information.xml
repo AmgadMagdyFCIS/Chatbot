@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,8 +7,45 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/article_heading"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@color/design_default_color_primary"
+        android:padding="@dimen/browser_actions_context_menu_min_padding"
+        android:text="@string/what_is_computer_science"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textColor="@color/white"
+        android:textStyle="bold"
 
-</FrameLayout>
+        />
+
+    <TextView
+        android:id="@+id/article_subheading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/faculty_of_computer_science_is"
+
+        android:layout_below="@+id/article_heading"
+        android:background="@color/design_default_color_primary_dark"
+        android:padding="@dimen/browser_actions_context_menu_min_padding"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+        android:id="@+id/article"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/article_subheading"
+        android:layout_marginTop="-15dp"
+        android:lineSpacingExtra="5sp"
+        android:padding="@dimen/browser_actions_context_menu_min_padding"
+        android:text="@string/paragraph"
+
+        android:textColor="@color/black" />
+
+
+
+</RelativeLayout>
