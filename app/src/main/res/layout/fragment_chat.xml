@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout_chat_chatbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,11 +34,13 @@
 
         <EditText
             android:id="@+id/edit_message"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_width="246dp"
+            android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
-            android:layout_toStartOf="@+id/button_chat_send"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/input_bg"
             android:ems="10"
             android:hint="  Enter Message"
@@ -51,15 +53,28 @@
 
 
         <ImageButton
+            android:id="@+id/search_voice_btn_"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="10dp"
+            android:background="?attr/selectableItemBackground"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:src="@drawable/ic_baseline_keyboard_voice_24" />
+
+        <ImageButton
             android:id="@+id/button_chat_send"
             android:layout_width="64dp"
             android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="10dp"
             android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_baseline_send_24"
             tools:ignore="SpeakableTextPresentCheck" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

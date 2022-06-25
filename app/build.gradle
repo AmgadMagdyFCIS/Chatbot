@@ -1,8 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
-
-    //id 'com.chaquo.python'
+    id 'com.chaquo.python'
 
 }
 
@@ -21,8 +20,25 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
+        python {
+            buildPython "C:/Users/LENOVO/AppData/Local/Programs/Python/Python310/python.exe"
+            pip {
+                install "tensorflow"
+                install "keras"
+                install "pandas"
+                install "numpy"
+                install "tflearn"
+                install "nltk"
+                install "googletrans==3.1.0a0"
+                install "jsonpickle"
+            }
 
-
+        }
+        sourceSets {
+            main {
+                python.srcDir "src/main/python/chatbot ara using lemma"
+            }
+        }
     }
 
     buildTypes {

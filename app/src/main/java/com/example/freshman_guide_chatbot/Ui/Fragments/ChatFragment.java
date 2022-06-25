@@ -1,11 +1,15 @@
 package com.example.freshman_guide_chatbot.Ui.Fragments;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.speech.RecognizerIntent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +23,15 @@ import com.example.freshman_guide_chatbot.Ui.Recyclerview.MessageListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
+
 public class ChatFragment extends Fragment {
+    private final int VOICE_REQUEST = 1999;
     private RecyclerView recyclerView;
     private MessageListAdapter userMessageListAdapter;
-    private ImageButton send;
+    private ImageButton send,voice;
     private EditText messageText;
     Message message;
     ArrayList<Message> messageList;
@@ -34,6 +43,7 @@ public class ChatFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_chat);
         messageText=view.findViewById(R.id.edit_message);
         send=view.findViewById(R.id.button_chat_send);
+        voice=view.findViewById(R.id.search_voice_btn_);
 
         messageList=new ArrayList<>();
         message=new Message("اهلا","bot");
@@ -51,11 +61,47 @@ public class ChatFragment extends Fragment {
                 messageList.add(message);
                 userMessageListAdapter.notifyDataSetChanged();
 
+                //Python
+
+                // create python if not started
+                if(!Python.isStarted())
+                    Python.start(new AndroidPlatform(getActivity()));
+
+                // get instance from python to load python scripts
+                Python py = Python.getInstance();
+
+                //load python script called hello.py
+                final PyObject python_module = py.getModule("Implementv2");
+
+                // call a function called main from hello.py
+                PyObject response = python_module.callAttr("response",message.getMessageText());
+                message=new Message(response.toString(),"bot");
+                messageList.add(message);
+                userMessageListAdapter.notifyDataSetChanged();
+
             }
         });
 
-
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                startActivityForResult(intent, VOICE_REQUEST);
+            }
+        });
 
         return view;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == VOICE_REQUEST && resultCode == RESULT_OK) {
+            if (data != null) {
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                if (result != null) {
+                    messageText.setText(result.get(0));
+                }
+            }
+        }
     }
 }
