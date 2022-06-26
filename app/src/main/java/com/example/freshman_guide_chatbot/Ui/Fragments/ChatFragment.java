@@ -59,25 +59,8 @@ public class ChatFragment extends Fragment {
             public void onClick(View v) {
                 message=new Message(messageText.getText().toString(),"user");
                 messageList.add(message);
-                userMessageListAdapter.notifyDataSetChanged();
-
-                //Python
-
-                // create python if not started
-                if(!Python.isStarted())
-                    Python.start(new AndroidPlatform(getActivity()));
-
-                // get instance from python to load python scripts
-                Python py = Python.getInstance();
-
-                //load python script called hello.py
-                final PyObject python_module = py.getModule("Implementv2");
-//hala
-                // call a function called main from hello.py
-                PyObject response = python_module.callAttr("response",message.getMessageText());
-                message=new Message(response.toString(),"bot");
-                messageList.add(message);
-                userMessageListAdapter.notifyDataSetChanged();
+                userMessageListAdapter.notifyItemInserted(messageList.size()-1);
+                botResponse();
 
             }
         });
@@ -92,6 +75,27 @@ public class ChatFragment extends Fragment {
 
         return view;
     }
+    public void botResponse()
+    {
+        //Python
+
+        // create python if not started
+        if(!Python.isStarted())
+            Python.start(new AndroidPlatform(getActivity()));
+
+        // get instance from python to load python scripts
+        Python py = Python.getInstance();
+
+        //load python script called hello.py
+        final PyObject python_module = py.getModule("Implementv2");
+//hala
+        // call a function called main from hello.py
+        PyObject response = python_module.callAttr("response",message.getMessageText());
+        message=new Message(response.toString(),"bot");
+        messageList.add(message);
+        userMessageListAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -6,6 +6,7 @@ import random
 import numpy as np
 #import random
 import nltk
+nltk.download('omw-1.4')
 #import re
 nltk.download('punkt')
 from nltk.stem.arlstem import ARLSTem
@@ -18,9 +19,13 @@ lemma=WordNetLemmatizer()
 stemmer = ARLSTem()
 
 
+
+
 ## Loading the data:
-with open('intents_withnorepeatDoctor.json',encoding="utf8")as datafile:
-  intents =json.load(datafile)
+#with open('intents_withnorepeatDoctor.json',encoding="utf8")as datafile:
+import os
+dir_path = os.path.dirname(os.path.realpath(__file__))
+intents = json.load(open(dir_path + '/' + 'intents_withnorepeatDoctor.json'))
 
 
 ## Data pre-processing:
@@ -44,11 +49,7 @@ for intent in intents['intents']:
       
 #words_stemed=[stemmer.stem(w) for w in words if w not in ignore_words]
 words = sorted(list(set(words)))  
-#classes = sorted(list(set(classes)))
-
-print(len(documents)," documents")
-print(len(classes)," classes", classes)
-print(len(words)," unique stemmed word", words)
+#classes = sorted(list(set(classes))
 
 
 ## Converting data into vectors:
@@ -82,7 +83,8 @@ net=tflearn.regression(net)
 model=tflearn.DNN(net,tensorboard_dir='tflearn_logs')
 #model.fit(train_x,train_y,n_epoch=500,batch_size=8,show_metric=True)
 #model.save('model.tflearn')
-model.load('./model.tflearn')
+model.load(dir_path + '/' +'model.tflearn')
+#model.load('./model.tflearn')
 
 ## Predictions:
 
@@ -94,8 +96,7 @@ def clean_up_sentence(sentence):
     arafa=[]
     for word in sentence_words: 
       if word not in ignore_words:
-          arafa.append(lemma.lemmatize(word)) 
-    print ("hyyyyyyyyyyy",arafa)
+          arafa.append(lemma.lemmatize(word))
     return list(set(arafa))
 
 
@@ -111,14 +112,10 @@ def bow(sentence,words,show_details=True):
 
 def classify(sentence):
     results = model.predict([bow(sentence,words)])[0]
-    print("acc?",results)
     results = [ [i,r] for i,r in enumerate(results) if r>-99999999999999999999999999999999999999999999999999999999 ]
-    print("Main acc?",results)
     results.sort(key=lambda x: x[1],reverse = True)
-    print("Main acc sorted?",results)
     return_list=[]
     for r in results:
-        print("HHH",r[0],r[1])
         return_list.append( (   classes[r[0]],r[1]   ) )
     return return_list
 
@@ -178,12 +175,9 @@ def EnglishToArabicIdioms(sentence) :
     for key, value in words_to_replace.items():
     # Replace key character with value character in string
         sentence = sentence.replace(key, value)
-    print(sentence)
     return sentence     
 
 
-while(True):
-    task=input("User: ")
-    print("FCIS Freshman Bot: ",response(task))
+
      
 
