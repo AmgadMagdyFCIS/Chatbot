@@ -72,7 +72,7 @@ public class ChatFragment extends Fragment {
 
                 //load python script called hello.py
                 final PyObject python_module = py.getModule("Implementv2");
-
+//hala
                 // call a function called main from hello.py
                 PyObject response = python_module.callAttr("response",message.getMessageText());
                 message=new Message(response.toString(),"bot");
