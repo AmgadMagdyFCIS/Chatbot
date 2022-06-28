@@ -12,11 +12,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.WindowManager;
 
 import com.example.freshman_guide_chatbot.R;
 import com.example.freshman_guide_chatbot.Ui.Fragments.ChatFragment;
 import com.example.freshman_guide_chatbot.Ui.Fragments.InformationFragment;
+import com.example.freshman_guide_chatbot.Ui.Fragments.StudentsActivitiesFragment;
 import com.example.freshman_guide_chatbot.Ui.Registration.Login;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -78,8 +78,8 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
             case R.id.guide:
                 return true;
 
-            case R.id.settings:
-
+            case R.id.students_activity:
+                transaction(new StudentsActivitiesFragment());
                 return true;
 
             case R.id.about_us:
@@ -92,6 +92,13 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         return true;
     }
 
+    public void transaction(Fragment fragment)
+    {
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment);//f
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
     private void Information()
     {
 
