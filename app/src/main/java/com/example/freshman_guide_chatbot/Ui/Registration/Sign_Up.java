@@ -106,21 +106,22 @@ public class Sign_Up extends AppCompatActivity
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful())
                     {
+                        fbUser=fbAuth.getCurrentUser();
                         progressDialog.dismiss();
                         if(fbUser!=null) {
                             fbUser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
                                     Toast.makeText(getApplication(), "Verification Email Has been Sent", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(getApplication(), Login.class);
+                                    intent.putExtra("email", strEmail);
+                                    intent.putExtra("password", strPassword);
+                                    startActivity(intent);
+                                    //Toast.makeText(getApplication(),"successful Registration",Toast.LENGTH_LONG).show();
                                 }
                             });
 
-                            Intent intent = new Intent(getApplication(), Login.class);
-                            intent.putExtra("email", strEmail);
-                            intent.putExtra("password", strPassword);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-                            //Toast.makeText(getApplication(),"successful Registration",Toast.LENGTH_LONG).show();
+
                         }
                         else
                         {
@@ -134,11 +135,6 @@ public class Sign_Up extends AppCompatActivity
                         Toast.makeText(getApplication(),"Please enter a valid email",Toast.LENGTH_LONG).show();
                     }
 
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(getApplication(),"Please enter a valid email",Toast.LENGTH_LONG).show();
                 }
             });
         }

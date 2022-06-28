@@ -26,95 +26,76 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
-    TextView createAccount ,forgetPassword;
+    TextView createAccount, forgetPassword;
     EditText email, password;
     Button btn_login;
-    ImageView SignInWithGoogle ;
+    ImageView SignInWithGoogle;
     ProgressDialog progressDialog;
     FirebaseAuth fbAuth;
     FirebaseUser fbUser;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
         createAccount = findViewById(R.id.createNewAcc);
-        forgetPassword=findViewById(R.id.forgotpassword);
+        forgetPassword = findViewById(R.id.forgotpassword);
         email = findViewById(R.id.InputEmail);
+
+
         password = findViewById(R.id.InputPassword);
+        try {
+            email.setText(getIntent().getExtras().getString("email", ""));
+            password.setText(getIntent().getExtras().getString("password", ""));
+        } catch (Exception e) {
+        }
+
+
         btn_login = findViewById(R.id.btn_Login);
-        SignInWithGoogle=findViewById(R.id.btn_google);
+        SignInWithGoogle = findViewById(R.id.btn_google);
         progressDialog = new ProgressDialog(this);
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
 
-
-        if(fbUser!=null)
-        {
-            Intent intent = new Intent(getApplication(),NavigationActivity.class);
-           // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-
-        }
-        else
-        {
-            if(getIntent()!=null&&getIntent().getExtras()!=null)
-            {
-                email.setText(getIntent().getExtras().getString("email",""));
-                password.setText(getIntent().getExtras().getString("password",""));
+        forgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplication(), ForgetPassword.class);
+                startActivity(i);
             }
+        });
+        createAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), Sign_Up.class);
+                startActivity(intent);
+            }
+        });
 
-            forgetPassword.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Intent i=new Intent(getApplication(),ForgetPassword.class);
-                    startActivity(i);
-                }
-            });
-            createAccount.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Intent intent = new Intent(getApplication(), Sign_Up.class);
-                    startActivity(intent);
-                }
-            });
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            btn_login.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-
-                    LogIn();
-                }
-            });
+                LogIn();
+            }
+        });
 
 
-            SignInWithGoogle.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Intent intent = new Intent(getApplication(), SignInWithGoogle.class);
-                    startActivity(intent);
-                }
-            });
-        }
-
+        SignInWithGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), SignInWithGoogle.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
 
-    private void LogIn()
-    {
+    private void LogIn() {
 
         String strEmail = email.getText().toString();
         String strPassword = password.getText().toString();
@@ -131,24 +112,23 @@ public class Login extends AppCompatActivity {
             progressDialog.setCanceledOnTouchOutside(false);
             progressDialog.show();
 
-            fbAuth.signInWithEmailAndPassword(strEmail,strPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>()
-            {
+            fbAuth.signInWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
-                public void onComplete(@NonNull Task<AuthResult> task)
-                {
-                    if(task.isSuccessful())
-                    {
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
                         progressDialog.dismiss();
-                        Intent intent=new Intent(getApplication(), NavigationActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        Toast.makeText(getApplication(),"successful Login",Toast.LENGTH_LONG).show();
+                        if(fbUser.isEmailVerified()) {
+                            Intent intent = new Intent(getApplication(), NavigationActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            Toast.makeText(getApplication(), "successful Login", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                            Toast.makeText(getApplication(), "please verify your email", Toast.LENGTH_LONG).show();
 
-                    }
-                    else
-                    {
+                    } else {
                         progressDialog.dismiss();
-                        Toast.makeText(getApplication(),""+task.getException(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplication(), "" + task.getException(), Toast.LENGTH_LONG).show();
 
                     }
                 }
@@ -156,8 +136,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    private boolean isEmail(String email)
-    {
+    private boolean isEmail(String email) {
         return !email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 }

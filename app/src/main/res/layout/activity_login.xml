@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/background_image_View"
         android:layout_width="wrap_content"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +20,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="800dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="175dp"
         app:cardBackgroundColor="@color/light"
         app:cardCornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -156,31 +156,11 @@
                 android:id="@+id/btn_google"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="180dp"
-                android:layout_marginEnd="180dp"
-                android:layout_marginBottom="315dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/or"
-                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/google_logo" />
-
-            <TextView
-                android:id="@+id/signinwithgoogletext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="116dp"
-                android:text="Sign in with google?"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_google"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/createNewAcc"
-                app:layout_constraintTop_toBottomOf="@+id/or"
-                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

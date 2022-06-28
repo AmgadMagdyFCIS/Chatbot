@@ -35,10 +35,10 @@ public class StudentsActivitiesFragment extends Fragment implements SAClickListe
         studentActivities = new ArrayList<>();
         studentActivities.add(new StudentActivity("acm","https://www.facebook.com/acmASCIS"));
         studentActivities.add(new StudentActivity("osc","https://www.facebook.com/oscgeeks"));
-        studentActivities.add(new StudentActivity("msc","https://www.facebook.com/ASUTC"));
         studentActivities.add(new StudentActivity("i_club","https://www.facebook.com/iClub-FCIS-ASU-103826611069882"));
-        studentActivities.add(new StudentActivity("robotics","https://www.facebook.com/RoboTech.FCIS"));
+        studentActivities.add(new StudentActivity("msc","https://www.facebook.com/ASUTC"));
         studentActivities.add(new StudentActivity("support","https://www.facebook.com/SUPPORT.FCIS"));
+        studentActivities.add(new StudentActivity("robotics","https://www.facebook.com/RoboTech.FCIS"));
 
         studentsActivitiesAdapter = new StudentsActivitiesAdapter(getActivity(), studentActivities, (SAClickListener) this);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));

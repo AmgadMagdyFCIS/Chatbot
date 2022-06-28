@@ -66,13 +66,24 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item)
     {
         drawerLayout.closeDrawer(GravityCompat.START);
         switch (item.getItemId())
         {
             case R.id.collage_info:
-                Information();
+                transaction(new InformationFragment());
                 return true;
 
             case R.id.guide:
@@ -99,17 +110,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-    private void Information()
-    {
 
-
-        Intent intent = new Intent(getApplication(), InformationFragment.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-
-
-
-    }
     private void SignOut()
     {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
