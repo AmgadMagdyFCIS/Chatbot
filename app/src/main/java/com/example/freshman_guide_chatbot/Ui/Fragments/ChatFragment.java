@@ -63,7 +63,7 @@ public class ChatFragment extends Fragment {
                 userMessageListAdapter.notifyDataSetChanged();
                 messageText.setText("");
                 botResponse();
-
+//
             }
         });
 
