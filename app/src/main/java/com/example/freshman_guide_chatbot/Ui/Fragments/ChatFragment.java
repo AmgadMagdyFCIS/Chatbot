@@ -23,6 +23,7 @@ import com.example.freshman_guide_chatbot.Ui.Recyclerview.MessageListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
@@ -71,6 +72,10 @@ public class ChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+
+                intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getClass().getPackage().getName());
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);// spilling
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ar-EG");
                 startActivityForResult(intent, VOICE_REQUEST);
             }
         });
