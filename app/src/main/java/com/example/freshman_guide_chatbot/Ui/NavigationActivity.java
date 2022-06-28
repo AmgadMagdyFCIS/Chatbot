@@ -43,7 +43,6 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.nav);

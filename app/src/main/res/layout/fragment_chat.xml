@@ -10,6 +10,7 @@
         android:id="@+id/recycler_chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/layout_chat_chatbox" />
 
@@ -34,11 +35,10 @@
 
         <EditText
             android:id="@+id/edit_message"
-            android:layout_width="246dp"
+            android:layout_width="250dp"
             android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/input_bg"
@@ -58,7 +58,6 @@
             android:layout_height="48dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginEnd="10dp"
             android:background="?attr/selectableItemBackground"
             tools:ignore="SpeakableTextPresentCheck"
             android:src="@drawable/ic_baseline_keyboard_voice_24" />

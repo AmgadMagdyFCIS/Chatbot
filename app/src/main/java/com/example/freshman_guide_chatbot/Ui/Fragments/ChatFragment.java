@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.freshman_guide_chatbot.R;
+import com.example.freshman_guide_chatbot.Ui.PythonService;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.Message;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.MessageListAdapter;
 
@@ -59,7 +60,8 @@ public class ChatFragment extends Fragment {
             public void onClick(View v) {
                 message=new Message(messageText.getText().toString(),"user");
                 messageList.add(message);
-                userMessageListAdapter.notifyItemInserted(messageList.size()-1);
+                userMessageListAdapter.notifyDataSetChanged();
+                messageText.setText("");
                 botResponse();
 
             }
@@ -77,23 +79,15 @@ public class ChatFragment extends Fragment {
     }
     public void botResponse()
     {
-        //Python
+        PythonService pythonService=new PythonService();
 
-        // create python if not started
-        if(!Python.isStarted())
-            Python.start(new AndroidPlatform(getActivity()));
 
-        // get instance from python to load python scripts
-        Python py = Python.getInstance();
-
-        //load python script called hello.py
-        final PyObject python_module = py.getModule("Implementv2");
-//hala
         // call a function called main from hello.py
-        PyObject response = python_module.callAttr("response",message.getMessageText());
+        PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());
         message=new Message(response.toString(),"bot");
         messageList.add(message);
         userMessageListAdapter.notifyDataSetChanged();
+        recyclerView.scrollToPosition(messageList.size()-1);
     }
 
     @Override

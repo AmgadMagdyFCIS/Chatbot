@@ -7,7 +7,6 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.freshman_guide_chatbot.R;
 import com.example.freshman_guide_chatbot.Ui.Registration.Login;
 
 public class SplashScreen extends AppCompatActivity
@@ -17,6 +16,7 @@ public class SplashScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        startService(new Intent(this, PythonService.class));
 
         new Handler().postDelayed(new Runnable()
         {
@@ -25,7 +25,7 @@ public class SplashScreen extends AppCompatActivity
             {
 
                 startActivity( new Intent(SplashScreen.this, Login.class));
-                finish();
+                //finish();
 
 
             }
