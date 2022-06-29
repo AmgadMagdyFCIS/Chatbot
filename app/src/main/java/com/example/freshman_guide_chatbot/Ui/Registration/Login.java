@@ -48,18 +48,26 @@ public class Login extends AppCompatActivity {
 
 
         password = findViewById(R.id.InputPassword);
-        try {
-            email.setText(getIntent().getExtras().getString("email", ""));
-            password.setText(getIntent().getExtras().getString("password", ""));
-        } catch (Exception e) {
-        }
-
-
         btn_login = findViewById(R.id.btn_Login);
         SignInWithGoogle = findViewById(R.id.btn_google);
         progressDialog = new ProgressDialog(this);
         fbAuth = FirebaseAuth.getInstance();
         fbUser = fbAuth.getCurrentUser();
+        try {
+            email.setText(getIntent().getExtras().getString("email", ""));
+            password.setText(getIntent().getExtras().getString("password", ""));
+        } catch (Exception e) {
+            if(fbUser!=null)
+            {
+                Intent intent = new Intent(getApplication(),NavigationActivity.class);
+                // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
+        }
+
+
+
 
         forgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override

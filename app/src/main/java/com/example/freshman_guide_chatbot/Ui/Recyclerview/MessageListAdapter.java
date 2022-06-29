@@ -20,12 +20,15 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     private List<Message> messages;
     private View view;
     public int index=0;
+    private SAClickListener sAClickListener;
 
-    public MessageListAdapter(Context context, List<Message> messages) {
+    public MessageListAdapter(Context context, List<Message> messages ,SAClickListener sAClickListener) {
         this.context = context;
         this.messages = messages;
         if(messages.size()>1)
             index = messages.size() - 2;
+        this.sAClickListener=sAClickListener;
+        index=0;
 
     }
 
@@ -59,9 +62,19 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             super(itemView);
             if (messages.get(index).getSender().equals("user"))
                 messageText = (TextView) itemView.findViewById(R.id.my_message);
-            else
+            else {
                 messageText = (TextView) itemView.findViewById(R.id.bot_message);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (getAdapterPosition() != -1) {
+                            sAClickListener.onRecyclerViewClick(getAdapterPosition());
+                        }
+                    }
+                });
+            }
             index++;
+
         }
     }
 

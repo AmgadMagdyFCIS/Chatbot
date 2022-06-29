@@ -10,7 +10,7 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;*/
 
 public class PythonService extends Service {
-   // public static PyObject python_module;
+    //public static PyObject python_module;
     public PythonService() {
     }
 
@@ -25,7 +25,7 @@ public class PythonService extends Service {
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        /*//Python
+      /*  //Python
 
         // create python if not started
         if(!Python.isStarted())

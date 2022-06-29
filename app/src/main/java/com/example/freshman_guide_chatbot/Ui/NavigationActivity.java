@@ -82,6 +82,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         drawerLayout.closeDrawer(GravityCompat.START);
         switch (item.getItemId())
         {
+            case R.id.chat_home:
+                transaction(new ChatFragment());
+                return true;
             case R.id.collage_info:
                 transaction(new InformationFragment());
                 return true;

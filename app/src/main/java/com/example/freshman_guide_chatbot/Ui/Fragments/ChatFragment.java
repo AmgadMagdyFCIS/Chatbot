@@ -2,39 +2,65 @@ package com.example.freshman_guide_chatbot.Ui.Fragments;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.freshman_guide_chatbot.R;
 import com.example.freshman_guide_chatbot.Ui.PythonService;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.Message;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.MessageListAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.example.freshman_guide_chatbot.Ui.Recyclerview.SAClickListener;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /*import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;*/
-
-public class ChatFragment extends Fragment {
+import com.chaquo.python.android.AndroidPlatform;
+import com.example.freshman_guide_chatbot.Ui.Registration.Login;
+import com.example.freshman_guide_chatbot.Ui.SplashScreen;
+import com.google.android.gms.common.internal.Constants;
+import com.google.android.gms.tasks.OnFailureListener;*/
+public class ChatFragment extends Fragment implements SAClickListener {
     private final int VOICE_REQUEST = 1999;
     private RecyclerView recyclerView;
     private MessageListAdapter userMessageListAdapter;
     private ImageButton send,voice;
     private EditText messageText;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    OkHttpClient client;
+    Request request;
     Message message;
     ArrayList<Message> messageList;
     @Override
@@ -48,11 +74,11 @@ public class ChatFragment extends Fragment {
         voice=view.findViewById(R.id.search_voice_btn_);
 
         messageList=new ArrayList<>();
-        message=new Message("اهلا","bot");
+        message=new Message("مرحبا كيف يمكنني مساعدتك؟","bot");
         messageList.add(message);
 
 
-        userMessageListAdapter = new MessageListAdapter(getActivity(), messageList);
+        userMessageListAdapter = new MessageListAdapter(getActivity(), messageList,(SAClickListener)this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(userMessageListAdapter);
 
@@ -63,8 +89,7 @@ public class ChatFragment extends Fragment {
                 messageList.add(message);
                 userMessageListAdapter.notifyDataSetChanged();
                 messageText.setText("");
-                botResponse();
-//
+                post(message.getMessageText());
             }
         });
 
@@ -82,17 +107,56 @@ public class ChatFragment extends Fragment {
 
         return view;
     }
-    public void botResponse()
+
+
+    public void post(String message)
+    {
+        client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder().add("response",message).build();
+        request = new Request.Builder().url("url").post(body).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Toast.makeText(getActivity(),"something went wrong",Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                botResponse(response.body().toString());
+            }
+        });
+
+    }
+    public void botResponse(String response)
     {
         /*PythonService pythonService=new PythonService();
-
-
         // call a function called main from hello.py
-        PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());
-        message=new Message(response.toString(),"bot");
-        messageList.add(message);
-        userMessageListAdapter.notifyDataSetChanged();
-        recyclerView.scrollToPosition(messageList.size()-1);*/
+        PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());*/
+
+        if(response.equals("جدول"))
+        {
+
+
+            storageRef.child("images/Timetable.pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    message=new Message("اضغط هنا لتصل الي الجدول","bot",uri.toString());
+                    messageList.add(message);
+                    userMessageListAdapter.notifyDataSetChanged();
+                    recyclerView.scrollToPosition(messageList.size()-1);
+                }
+            });
+
+        }
+
+        else {
+            message = new Message(response.toString(), "bot");
+            messageList.add(message);
+            userMessageListAdapter.notifyDataSetChanged();
+            recyclerView.scrollToPosition(messageList.size()-1);
+        }
+
     }
 
     @Override
@@ -105,6 +169,16 @@ public class ChatFragment extends Fragment {
                     messageText.setText(result.get(0));
                 }
             }
+        }
+    }
+
+    @Override
+    public void onRecyclerViewClick(int pos) {
+        if(!messageList.get(pos).getUri().equals("")) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(messageList.get(pos).getUri()));
+            startActivity(intent);
+
+
         }
     }
 }

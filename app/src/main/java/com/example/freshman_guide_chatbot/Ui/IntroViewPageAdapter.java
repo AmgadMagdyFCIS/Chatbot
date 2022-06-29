@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
-import android.support.v4.*;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
