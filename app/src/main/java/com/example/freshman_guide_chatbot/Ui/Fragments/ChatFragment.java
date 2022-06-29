@@ -32,19 +32,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import com.chaquo.python.PyObject;
-import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;
-import com.example.freshman_guide_chatbot.Ui.Recyclerview.SAClickListener;
-import com.example.freshman_guide_chatbot.Ui.Registration.Login;
-import com.example.freshman_guide_chatbot.Ui.SplashScreen;
-import com.google.android.gms.common.internal.Constants;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
+import com.example.freshman_guide_chatbot.Ui.Recyclerview.SAClickListener;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -53,6 +44,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+/*import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
+import com.example.freshman_guide_chatbot.Ui.Registration.Login;
+import com.example.freshman_guide_chatbot.Ui.SplashScreen;
+import com.google.android.gms.common.internal.Constants;
+import com.google.android.gms.tasks.OnFailureListener;*/
 public class ChatFragment extends Fragment implements SAClickListener {
     private final int VOICE_REQUEST = 1999;
     private RecyclerView recyclerView;
@@ -91,11 +89,7 @@ public class ChatFragment extends Fragment implements SAClickListener {
                 messageList.add(message);
                 userMessageListAdapter.notifyDataSetChanged();
                 messageText.setText("");
-                //post
                 post(message.getMessageText());
-                //get
-
-//
             }
         });
 
