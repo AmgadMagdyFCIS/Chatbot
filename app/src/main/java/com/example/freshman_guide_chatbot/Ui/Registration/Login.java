@@ -48,6 +48,11 @@ public class Login extends AppCompatActivity {
 
 
         password = findViewById(R.id.InputPassword);
+        btn_login = findViewById(R.id.btn_Login);
+        SignInWithGoogle = findViewById(R.id.btn_google);
+        progressDialog = new ProgressDialog(this);
+        fbAuth = FirebaseAuth.getInstance();
+        fbUser = fbAuth.getCurrentUser();
         try {
             email.setText(getIntent().getExtras().getString("email", ""));
             password.setText(getIntent().getExtras().getString("password", ""));
@@ -62,11 +67,7 @@ public class Login extends AppCompatActivity {
         }
 
 
-        btn_login = findViewById(R.id.btn_Login);
-        SignInWithGoogle = findViewById(R.id.btn_google);
-        progressDialog = new ProgressDialog(this);
-        fbAuth = FirebaseAuth.getInstance();
-        fbUser = fbAuth.getCurrentUser();
+
 
         forgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override

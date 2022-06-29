@@ -2,17 +2,23 @@ package com.example.freshman_guide_chatbot.Ui.Fragments;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -28,13 +34,24 @@ import java.util.Locale;
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
+import com.example.freshman_guide_chatbot.Ui.Recyclerview.SAClickListener;
+import com.example.freshman_guide_chatbot.Ui.Registration.Login;
+import com.example.freshman_guide_chatbot.Ui.SplashScreen;
+import com.google.android.gms.common.internal.Constants;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-public class ChatFragment extends Fragment {
+public class ChatFragment extends Fragment implements SAClickListener {
     private final int VOICE_REQUEST = 1999;
     private RecyclerView recyclerView;
     private MessageListAdapter userMessageListAdapter;
     private ImageButton send,voice;
     private EditText messageText;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+
     Message message;
     ArrayList<Message> messageList;
     @Override
@@ -52,7 +69,7 @@ public class ChatFragment extends Fragment {
         messageList.add(message);
 
 
-        userMessageListAdapter = new MessageListAdapter(getActivity(), messageList);
+        userMessageListAdapter = new MessageListAdapter(getActivity(), messageList,(SAClickListener)this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(userMessageListAdapter);
 
@@ -85,14 +102,33 @@ public class ChatFragment extends Fragment {
     public void botResponse()
     {
         PythonService pythonService=new PythonService();
-
-
         // call a function called main from hello.py
         PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());
-        message=new Message(response.toString(),"bot");
-        messageList.add(message);
-        userMessageListAdapter.notifyDataSetChanged();
-        recyclerView.scrollToPosition(messageList.size()-1);
+
+
+        if(response.equals("جدول"))
+        {
+
+
+            storageRef.child("images/Timetable.pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    message=new Message("اضغط هنا لتصل الي الجدول","bot",uri.toString());
+                    messageList.add(message);
+                    userMessageListAdapter.notifyDataSetChanged();
+                    recyclerView.scrollToPosition(messageList.size()-1);
+                }
+            });
+
+        }
+
+        else {
+            message = new Message(response.toString(), "bot");
+            messageList.add(message);
+            userMessageListAdapter.notifyDataSetChanged();
+            recyclerView.scrollToPosition(messageList.size()-1);
+        }
+
     }
 
     @Override
@@ -105,6 +141,16 @@ public class ChatFragment extends Fragment {
                     messageText.setText(result.get(0));
                 }
             }
+        }
+    }
+
+    @Override
+    public void onRecyclerViewClick(int pos) {
+        if(!messageList.get(pos).getUri().equals("")) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(messageList.get(pos).getUri()));
+            startActivity(intent);
+
+
         }
     }
 }
