@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import com.example.freshman_guide_chatbot.R;
 
 
-public class GuideFragment extends Fragment {
+public class GuideFragment extends Fragment
+{
 
 
 

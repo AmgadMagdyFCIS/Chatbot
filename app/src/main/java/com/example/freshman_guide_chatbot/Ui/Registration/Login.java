@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.freshman_guide_chatbot.R;
+import com.example.freshman_guide_chatbot.Ui.IntroActivity;
 import com.example.freshman_guide_chatbot.Ui.NavigationActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -118,7 +119,7 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
                         if(fbUser.isEmailVerified()) {
-                            Intent intent = new Intent(getApplication(), NavigationActivity.class);
+                            Intent intent = new Intent(getApplication(), IntroActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             Toast.makeText(getApplication(), "successful Login", Toast.LENGTH_LONG).show();
