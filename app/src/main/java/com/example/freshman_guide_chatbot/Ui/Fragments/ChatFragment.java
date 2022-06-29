@@ -21,12 +21,14 @@ import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.freshman_guide_chatbot.R;
 import com.example.freshman_guide_chatbot.Ui.PythonService;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.Message;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.MessageListAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -43,6 +45,14 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class ChatFragment extends Fragment implements SAClickListener {
     private final int VOICE_REQUEST = 1999;
     private RecyclerView recyclerView;
@@ -51,7 +61,8 @@ public class ChatFragment extends Fragment implements SAClickListener {
     private EditText messageText;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
-
+    OkHttpClient client;
+    Request request;
     Message message;
     ArrayList<Message> messageList;
     @Override
@@ -80,7 +91,10 @@ public class ChatFragment extends Fragment implements SAClickListener {
                 messageList.add(message);
                 userMessageListAdapter.notifyDataSetChanged();
                 messageText.setText("");
-                botResponse();
+                //post
+                post(message.getMessageText());
+                //get
+
 //
             }
         });
@@ -99,12 +113,32 @@ public class ChatFragment extends Fragment implements SAClickListener {
 
         return view;
     }
-    public void botResponse()
-    {
-        PythonService pythonService=new PythonService();
-        // call a function called main from hello.py
-        PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());
 
+
+    public void post(String message)
+    {
+        client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder().add("response",message).build();
+        request = new Request.Builder().url("url").post(body).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Toast.makeText(getActivity(),"something went wrong",Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                botResponse(response.body().toString());
+            }
+        });
+
+    }
+    public void botResponse(String response)
+    {
+        /*PythonService pythonService=new PythonService();
+        // call a function called main from hello.py
+        PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());*/
 
         if(response.equals("جدول"))
         {
