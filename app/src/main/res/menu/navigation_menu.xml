@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/chat_home"
+        android:icon="@drawable/ic_baseline_chat_24"
+        android:iconTint="@color/light"
+        android:title="Chat " />
+    <item
         android:id="@+id/collage_info"
         android:icon="@drawable/ic_baseline_info_24"
         android:title="More Information"
