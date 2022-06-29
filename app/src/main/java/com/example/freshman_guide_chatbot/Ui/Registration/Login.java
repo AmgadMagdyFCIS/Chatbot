@@ -52,6 +52,13 @@ public class Login extends AppCompatActivity {
             email.setText(getIntent().getExtras().getString("email", ""));
             password.setText(getIntent().getExtras().getString("password", ""));
         } catch (Exception e) {
+            if(fbUser!=null)
+            {
+                Intent intent = new Intent(getApplication(),NavigationActivity.class);
+                // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+
+            }
         }
 
 

@@ -25,9 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/*import com.chaquo.python.PyObject;
+import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;*/
+import com.chaquo.python.android.AndroidPlatform;
 
 public class ChatFragment extends Fragment {
     private final int VOICE_REQUEST = 1999;
@@ -48,7 +48,7 @@ public class ChatFragment extends Fragment {
         voice=view.findViewById(R.id.search_voice_btn_);
 
         messageList=new ArrayList<>();
-        message=new Message("اهلا","bot");
+        message=new Message("مرحبا كيف يمكنني مساعدتك؟","bot");
         messageList.add(message);
 
 
@@ -84,7 +84,7 @@ public class ChatFragment extends Fragment {
     }
     public void botResponse()
     {
-        /*PythonService pythonService=new PythonService();
+        PythonService pythonService=new PythonService();
 
 
         // call a function called main from hello.py
@@ -92,7 +92,7 @@ public class ChatFragment extends Fragment {
         message=new Message(response.toString(),"bot");
         messageList.add(message);
         userMessageListAdapter.notifyDataSetChanged();
-        recyclerView.scrollToPosition(messageList.size()-1);*/
+        recyclerView.scrollToPosition(messageList.size()-1);
     }
 
     @Override

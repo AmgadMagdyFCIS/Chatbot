@@ -7,16 +7,16 @@
         android:title="More Information"
         android:iconTint="@color/light" />
     <item
+        android:id="@+id/students_activity"
+        android:icon="@drawable/ic_baseline_groups_24"
+        android:iconTint="@color/light"
+        android:title="Students Activities" />
+    <item
         android:id="@+id/guide"
         android:icon="@drawable/ic_baseline_help_outline_24"
         android:title="Guide"
         android:iconTint="@color/light"
         />
-    <item
-        android:id="@+id/students_activity"
-        android:icon="@drawable/ic_baseline_settings_24"
-        android:iconTint="@color/light"
-        android:title="Students Activities" />
     <item
         android:id="@+id/about_us"
         android:icon="@drawable/ic_baseline_people_24"
