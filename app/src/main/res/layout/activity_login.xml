@@ -20,7 +20,7 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="800dp"
-        android:layout_marginTop="175dp"
+        android:layout_marginTop="200dp"
         app:cardBackgroundColor="@color/light"
         app:cardCornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,11 +102,11 @@
                 android:id="@+id/forgotpassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="216dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:text="Forgot Password?"
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/InputPassword" />
 

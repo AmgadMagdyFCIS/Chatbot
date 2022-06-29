@@ -16,7 +16,7 @@ public class SplashScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-        startService(new Intent(this, PythonService.class));
+        //startService(new Intent(this, PythonService.class));
 
         new Handler().postDelayed(new Runnable()
         {
