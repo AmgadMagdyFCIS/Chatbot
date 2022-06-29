@@ -26,9 +26,6 @@ public class IntroActivity extends AppCompatActivity {
         mlist.add( new ScreenItem("Your Schedule","We can tell you your schedule",R.drawable.schedule));
         mlist.add( new ScreenItem("The Professors` schedule","We can tell you the Professors` schedule either",R.drawable.professors));
 
-
-
-
         screenPager= findViewById(R.id.screen_viewpager);
 
     }

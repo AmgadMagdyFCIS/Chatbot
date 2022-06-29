@@ -41,7 +41,6 @@ public class StudentsActivitiesAdapter  extends RecyclerView.Adapter<StudentsAct
         holder.SAImage.setImageResource(resourceIdentifier);
 
     }
-
     @Override
     public int getItemCount() {
         return SAs.size();
