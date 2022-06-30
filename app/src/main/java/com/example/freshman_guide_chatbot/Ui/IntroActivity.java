@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TableLayout;
 
@@ -24,6 +28,7 @@ public class IntroActivity extends AppCompatActivity {
     TabLayout tabindicator;
     Button Nextbtn  , btngetStarted;
     int position;
+    Animation btnAnim;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -32,6 +37,18 @@ public class IntroActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        if(restorePrefData())
+        {
+
+            Intent mainAcitivity = new Intent(getApplicationContext(),NavigationActivity.class);
+            startActivity(mainAcitivity);
+            finish();
+        }
+
+
+
+
+
         getSupportActionBar().hide();
 
 
@@ -39,6 +56,7 @@ public class IntroActivity extends AppCompatActivity {
         tabindicator = findViewById(R.id.tabindicator);
         Nextbtn = findViewById(R.id.FirstPageButton);
         btngetStarted= findViewById(R.id.btnGet_Started);
+        btnAnim= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.button_animation);
 
         List<ScreenItem> mlist = new ArrayList<>();
         mlist.add( new ScreenItem("Welcome","Welcome to Your Friendly Chatbot",R.drawable.hichatbot));
@@ -59,7 +77,7 @@ public class IntroActivity extends AppCompatActivity {
                     position++;
                     screenPager.setCurrentItem(position);
                 }
-                if(position == mlist.size())
+                if(position == mlist.size()-1)
                 {
                     loadlastscreen();
 
@@ -67,15 +85,76 @@ public class IntroActivity extends AppCompatActivity {
             }
         });
 
+        tabindicator.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab)
+            {
+                if(tab.getPosition() == mlist.size()-1)
+                {
+                    loadlastscreen();
+
+                }
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab)
+            {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab)
+            {
+
+            }
+        });
+
+        btngetStarted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent mainActivity = new Intent(getApplicationContext(),NavigationActivity.class);
+                startActivity(mainActivity);
+
+                savePrefData();
+                finish();
+
+            }
+        });
+
 
 
     }
 
-    public  void  loadlastscreen()
+    private  boolean restorePrefData()
+    {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myprefs", MODE_PRIVATE);
+        Boolean isIntroAcitivityOpenedBefore = pref.getBoolean("isIntroOpened",false);
+        return isIntroAcitivityOpenedBefore;
+
+
+
+    }
+    private void savePrefData()
+    {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("myprefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean("isIntroOpened",true);
+        editor.commit();
+
+
+
+    }
+
+    private   void  loadlastscreen()
     {
         Nextbtn.setVisibility(View.INVISIBLE);
         btngetStarted.setVisibility(View.VISIBLE);
-        tabindicator.setVisibility(View.VISIBLE);
+        tabindicator.setVisibility(View.INVISIBLE);
+
+        btngetStarted.setAnimation(btnAnim);
 
 
 
