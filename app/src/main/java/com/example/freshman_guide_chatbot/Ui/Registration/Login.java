@@ -57,16 +57,13 @@ public class Login extends AppCompatActivity {
             email.setText(getIntent().getExtras().getString("email", ""));
             password.setText(getIntent().getExtras().getString("password", ""));
         } catch (Exception e) {
-            if(fbUser!=null)
-            {
-                Intent intent = new Intent(getApplication(),NavigationActivity.class);
+            if (fbUser != null) {
+                Intent intent = new Intent(getApplication(), IntroActivity.class);
                 // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
             }
         }
-
-
 
 
         forgetPassword.setOnClickListener(new View.OnClickListener() {
@@ -126,13 +123,13 @@ public class Login extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
-                        if(fbUser.isEmailVerified()) {
+                        fbUser = fbAuth.getCurrentUser();
+                        if (fbUser.isEmailVerified()) {
                             Intent intent = new Intent(getApplication(), IntroActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             Toast.makeText(getApplication(), "successful Login", Toast.LENGTH_LONG).show();
-                        }
-                        else
+                        } else
                             Toast.makeText(getApplication(), "please verify your email", Toast.LENGTH_LONG).show();
 
                     } else {

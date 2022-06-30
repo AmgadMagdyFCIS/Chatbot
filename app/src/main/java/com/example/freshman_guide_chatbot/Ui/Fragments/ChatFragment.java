@@ -112,8 +112,8 @@ public class ChatFragment extends Fragment implements SAClickListener {
     public void post(String message)
     {
         client = new OkHttpClient();
-        RequestBody body = new FormBody.Builder().add("response",message).build();
-        request = new Request.Builder().url("url").post(body).build();
+        RequestBody body = new FormBody.Builder().add("question",message).build();
+        request = new Request.Builder().url("").post(body).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {

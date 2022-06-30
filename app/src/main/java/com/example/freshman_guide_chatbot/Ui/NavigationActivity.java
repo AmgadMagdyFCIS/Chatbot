@@ -90,6 +90,9 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 return true;
 
             case R.id.guide:
+                Intent intent = new Intent(getApplication(), IntroActivity.class);
+                intent.putExtra("nav", "nav");
+                startActivity(intent);
                 return true;
 
             case R.id.students_activity:

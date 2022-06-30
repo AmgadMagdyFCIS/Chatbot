@@ -37,12 +37,17 @@ public class IntroActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        if(restorePrefData())
-        {
+        try {
+            String nav=getIntent().getExtras().getString("nav");
 
-            Intent mainAcitivity = new Intent(getApplicationContext(),NavigationActivity.class);
-            startActivity(mainAcitivity);
-            finish();
+        }catch (Exception e){
+            if(restorePrefData())
+            {
+                Intent mainAcitivity = new Intent(getApplicationContext(),NavigationActivity.class);
+                startActivity(mainAcitivity);
+                finish();
+            }
+
         }
 
 

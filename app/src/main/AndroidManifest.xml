@@ -26,6 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Ui.IntroActivity"
+            android:exported="false"/>
         <activity
             android:name=".Ui.NavigationActivity"
             android:exported="false" />
