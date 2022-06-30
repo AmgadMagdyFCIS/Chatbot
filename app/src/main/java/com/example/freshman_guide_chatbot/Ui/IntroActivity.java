@@ -6,6 +6,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TableLayout;
 
@@ -26,8 +28,14 @@ public class IntroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
 
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        getSupportActionBar().hide();
+
+
+        setContentView(R.layout.activity_intro);
         tabindicator = findViewById(R.id.tabindicator);
         Nextbtn = findViewById(R.id.FirstPageButton);
 
@@ -49,6 +57,10 @@ public class IntroActivity extends AppCompatActivity {
                 {
                     position++;
                     screenPager.setCurrentItem(position);
+                }
+                if(position == mlist.size())
+                {
+
                 }
             }
         });
