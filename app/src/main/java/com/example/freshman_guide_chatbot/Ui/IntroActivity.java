@@ -22,7 +22,7 @@ public class IntroActivity extends AppCompatActivity {
     private ViewPager screenPager;
     IntroViewPageAdapter introviewpageadapter ;
     TabLayout tabindicator;
-    Button Nextbtn ;
+    Button Nextbtn  , btngetStarted;
     int position;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,6 +38,7 @@ public class IntroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
         tabindicator = findViewById(R.id.tabindicator);
         Nextbtn = findViewById(R.id.FirstPageButton);
+        btngetStarted= findViewById(R.id.btnGet_Started);
 
         List<ScreenItem> mlist = new ArrayList<>();
         mlist.add( new ScreenItem("Welcome","Welcome to Your Friendly Chatbot",R.drawable.hichatbot));
@@ -60,10 +61,23 @@ public class IntroActivity extends AppCompatActivity {
                 }
                 if(position == mlist.size())
                 {
+                    loadlastscreen();
 
                 }
             }
         });
+
+
+
+    }
+
+    public  void  loadlastscreen()
+    {
+        Nextbtn.setVisibility(View.INVISIBLE);
+        btngetStarted.setVisibility(View.VISIBLE);
+        tabindicator.setVisibility(View.VISIBLE);
+
+
 
     }
 }
