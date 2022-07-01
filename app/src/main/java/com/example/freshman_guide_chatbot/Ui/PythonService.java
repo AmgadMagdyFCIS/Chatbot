@@ -2,15 +2,22 @@ package com.example.freshman_guide_chatbot.Ui;
 
 import android.app.Service;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.IBinder;
 import android.widget.Toast;
 
-/*import com.chaquo.python.PyObject;
+import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;*/
+import com.chaquo.python.android.AndroidPlatform;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class PythonService extends Service {
-    //public static PyObject python_module;
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    public static PyObject python_module;
+    public static String _uri;
     public PythonService() {
     }
 
@@ -25,7 +32,13 @@ public class PythonService extends Service {
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        /*//Python
+        storageRef.child("images/Timetable.pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                _uri=uri.toString();
+            }
+        });
+        //Python
 
         // create python if not started
         if(!Python.isStarted())
@@ -39,7 +52,7 @@ public class PythonService extends Service {
 
         // call a function called main from hello.py
         PyObject response = python_module.callAttr("response","سالي");
-        Toast.makeText(this,"Python is ready",Toast.LENGTH_LONG).show();*/
+        Toast.makeText(this,"Python is ready",Toast.LENGTH_LONG).show();
         return START_STICKY;
     }
 

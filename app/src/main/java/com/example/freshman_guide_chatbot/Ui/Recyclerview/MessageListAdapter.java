@@ -19,16 +19,18 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     private Context context;
     private List<Message> messages;
     private View view;
-    public int index=0;
+    public int index;
     private SAClickListener sAClickListener;
 
     public MessageListAdapter(Context context, List<Message> messages ,SAClickListener sAClickListener) {
         this.context = context;
         this.messages = messages;
-        if(messages.size()>1)
-            index = messages.size() - 2;
-        this.sAClickListener=sAClickListener;
+        /*if(messages.size()>1)
+            index = messages.size() - 2;*/
+
         index=0;
+        this.sAClickListener=sAClickListener;
+
 
     }
 

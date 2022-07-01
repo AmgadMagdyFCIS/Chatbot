@@ -38,7 +38,7 @@
                 android:paddingRight="12dp"
                 android:text="This is a Message"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="22sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
