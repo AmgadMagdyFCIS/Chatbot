@@ -44,13 +44,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;*/
 
-import com.chaquo.python.PyObject;
+/*import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.example.freshman_guide_chatbot.Ui.Registration.Login;
 import com.example.freshman_guide_chatbot.Ui.SplashScreen;
 import com.google.android.gms.common.internal.Constants;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnFailureListener;*/
 public class ChatFragment extends Fragment implements SAClickListener {
     private final int VOICE_REQUEST = 1999;
     private RecyclerView recyclerView;
@@ -131,7 +131,7 @@ public class ChatFragment extends Fragment implements SAClickListener {
     }*/
     public void botResponse()
     {
-        PythonService pythonService=new PythonService();
+        /*PythonService pythonService=new PythonService();
         // call a function called main from hello.py
         PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());
 
@@ -157,7 +157,7 @@ public class ChatFragment extends Fragment implements SAClickListener {
             messageList.add(message);
             userMessageListAdapter.notifyDataSetChanged();
             recyclerView.scrollToPosition(messageList.size()-1);
-        }
+        }*/
 
     }
 
