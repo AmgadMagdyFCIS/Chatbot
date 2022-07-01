@@ -36,21 +36,21 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.SAClickListener;
-import okhttp3.Call;
+/*import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
+import okhttp3.Response;*/
 
-/*import com.chaquo.python.PyObject;
+import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.example.freshman_guide_chatbot.Ui.Registration.Login;
 import com.example.freshman_guide_chatbot.Ui.SplashScreen;
 import com.google.android.gms.common.internal.Constants;
-import com.google.android.gms.tasks.OnFailureListener;*/
+import com.google.android.gms.tasks.OnFailureListener;
 public class ChatFragment extends Fragment implements SAClickListener {
     private final int VOICE_REQUEST = 1999;
     private RecyclerView recyclerView;
@@ -59,8 +59,8 @@ public class ChatFragment extends Fragment implements SAClickListener {
     private EditText messageText;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
-    OkHttpClient client;
-    Request request;
+    /*OkHttpClient client;
+    Request request;*/
     Message message;
     ArrayList<Message> messageList;
     @Override
@@ -89,7 +89,8 @@ public class ChatFragment extends Fragment implements SAClickListener {
                 messageList.add(message);
                 userMessageListAdapter.notifyDataSetChanged();
                 messageText.setText("");
-                post(message.getMessageText());
+                //post(message.getMessageText());
+                botResponse();
             }
         });
 
@@ -109,7 +110,7 @@ public class ChatFragment extends Fragment implements SAClickListener {
     }
 
 
-    public void post(String message)
+   /* public void post(String message)
     {
         client = new OkHttpClient();
         RequestBody body = new FormBody.Builder().add("question",message).build();
@@ -127,12 +128,13 @@ public class ChatFragment extends Fragment implements SAClickListener {
             }
         });
 
-    }
-    public void botResponse(String response)
+    }*/
+    public void botResponse()
     {
-        /*PythonService pythonService=new PythonService();
+        PythonService pythonService=new PythonService();
         // call a function called main from hello.py
-        PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());*/
+        PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());
+
 
         if(response.equals("جدول"))
         {
