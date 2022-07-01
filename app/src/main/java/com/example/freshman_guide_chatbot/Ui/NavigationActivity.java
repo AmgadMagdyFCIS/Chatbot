@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.freshman_guide_chatbot.R;
+import com.example.freshman_guide_chatbot.Ui.Fragments.AboutUsFragment;
 import com.example.freshman_guide_chatbot.Ui.Fragments.ChatFragment;
 import com.example.freshman_guide_chatbot.Ui.Fragments.InformationFragment;
 import com.example.freshman_guide_chatbot.Ui.Fragments.StudentsActivitiesFragment;
@@ -100,6 +101,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
                 return true;
 
             case R.id.about_us:
+                transaction(new AboutUsFragment());
                 return true;
             case R.id.log_out:
                 SignOut();

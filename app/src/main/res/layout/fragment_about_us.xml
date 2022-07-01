@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ui.Fragments.AboutUsFragment">
+    tools:context=".Ui.Fragments.InformationFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/article_heading"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
+        android:layout_height="wrap_content"
+        android:background="@color/light"
+        android:padding="@dimen/browser_actions_context_menu_min_padding"
+        android:text="@string/whoAreWe"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textColor="@color/white"
+        android:textStyle="bold"
 
-</FrameLayout>
+        />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="555dp"
+        android:layout_below="@+id/article_heading"
+        android:layout_marginTop="4dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/article"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
+                android:lineSpacingExtra="5sp"
+
+                android:text="@string/About_Us"
+
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
