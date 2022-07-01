@@ -77,7 +77,13 @@ public class IntroActivity extends AppCompatActivity {
         List<ScreenItem> mlist = new ArrayList<>();
         mlist.add( new ScreenItem("Welcome","Welcome to Your Friendly Chatbot",R.drawable.hichatbot));
         mlist.add( new ScreenItem("Your Schedule","We can tell you your schedule",R.drawable.schedule));
-        mlist.add( new ScreenItem("The Professors` schedule","We can tell you the Professors` schedule either",R.drawable.professors));
+        mlist.add( new ScreenItem("The Professors` schedule","We can tell you the Professors` schedules and their location either",R.drawable.professors));
+        mlist.add( new ScreenItem("The Professors` Emails","You can find the Professors` Emails as well",R.drawable.mails));
+        mlist.add( new ScreenItem("The Professors` offices","You will find info about the Faculty and its departments too",R.drawable.info));
+
+
+
+
         screenPager= findViewById(R.id.screen_viewpager);
         introviewpageadapter= new IntroViewPageAdapter(this,mlist);
         screenPager.setAdapter(introviewpageadapter);

@@ -36,6 +36,7 @@ public class IntroViewPageAdapter extends PagerAdapter
         ImageView imgslide = layoutscreen.findViewById(R.id.intro_image);
         TextView title = layoutscreen.findViewById(R.id.into_title);
         TextView descreption = layoutscreen.findViewById(R.id.intro_description);
+
         title.setText(mlistSreen.get(position).getTitle());
         descreption.setText(mlistSreen.get(position).getDescreption());
         imgslide.setImageResource(mlistSreen.get(position).getScreenImg());
