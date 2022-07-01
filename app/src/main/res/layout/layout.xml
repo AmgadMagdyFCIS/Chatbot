@@ -46,8 +46,8 @@
 
     <ImageView
         android:id="@+id/intro_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="105dp"
+        android:layout_height="90dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/into_title"
         app:layout_constraintEnd_toEndOf="parent"
