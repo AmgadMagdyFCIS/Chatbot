@@ -24,6 +24,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.freshman_guide_chatbot.R;
+import com.example.freshman_guide_chatbot.Ui.NavigationActivity;
 import com.example.freshman_guide_chatbot.Ui.PythonService;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.Message;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.MessageListAdapter;
@@ -57,6 +58,7 @@ public class ChatFragment extends Fragment implements SAClickListener {
     private MessageListAdapter userMessageListAdapter;
     private ImageButton send,voice;
     private EditText messageText;
+
     /*OkHttpClient client;
     Request request;*/
     Message message;
@@ -130,14 +132,14 @@ public class ChatFragment extends Fragment implements SAClickListener {
     }*/
     public void botResponse()
     {
-        PythonService pythonService=new PythonService();
+        //PythonService pythonService=new PythonService();
         // call a function called main from hello.py
-        PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());
+        PyObject response = NavigationActivity.python_module.callAttr("response",message.getMessageText());
 
 
         if(response.equals("جدول"))
         {
-            message=new Message("اضغط هنا لتصل الي الجدول","bot",pythonService._uri);
+            message=new Message("اضغط هنا لتصل الي الجدول","bot",NavigationActivity._uri);
             messageList.add(message);
             userMessageListAdapter.notifyDataSetChanged();
         }

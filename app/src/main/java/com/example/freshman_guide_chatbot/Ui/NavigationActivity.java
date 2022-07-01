@@ -10,9 +10,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.example.freshman_guide_chatbot.R;
 import com.example.freshman_guide_chatbot.Ui.Fragments.AboutUsFragment;
 import com.example.freshman_guide_chatbot.Ui.Fragments.ChatFragment;
@@ -22,12 +28,21 @@ import com.example.freshman_guide_chatbot.Ui.Registration.Login;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class NavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
+
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    public static PyObject python_module;
+    public static String _uri;
+
 
     ActionBarDrawerToggle actionBarDrawerToggle;
     DrawerLayout drawerLayout;
@@ -59,13 +74,54 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.container, new ChatFragment());
-        fragmentTransaction.commit();
+        final dialog loadingdialog = new dialog(this);
+        loadingdialog.startLoadingdialog();
+
+
+        // using handler class to set time delay methods
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                // after 4 seconds
+                waiting();
+                loadingdialog.dismissdialog();
+                fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.add(R.id.container, new ChatFragment());
+                fragmentTransaction.commit();
+            }
+
+        }, 4000); // 4 seconds
 
     }
 
+    void waiting()
+    {
+        storageRef.child("images/Timetable.pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                _uri=uri.toString();
+            }
+        });
+        //Python
+
+        // create python if not started
+        if(!Python.isStarted())
+            Python.start(new AndroidPlatform(this));
+
+        // get instance from python to load python scripts
+        Python py = Python.getInstance();
+
+        //load python script called hello.py
+        python_module = py.getModule("codeFeature").callAttr("Nlp_plus_ANN");
+
+        // call a function called main from hello.py
+        PyObject response = python_module.callAttr("response","سالي");
+        Toast.makeText(this,"Python is ready",Toast.LENGTH_LONG).show();
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Pass the event to ActionBarDrawerToggle, if it returns
