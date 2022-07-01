@@ -13,7 +13,9 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import com.example.freshman_guide_chatbot.R;
 import com.google.android.material.tabs.TabLayout;
@@ -28,6 +30,7 @@ public class IntroActivity extends AppCompatActivity {
     TabLayout tabindicator;
     Button Nextbtn  , btngetStarted;
     int position;
+    TextView skip;
     Animation btnAnim;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +65,14 @@ public class IntroActivity extends AppCompatActivity {
         Nextbtn = findViewById(R.id.FirstPageButton);
         btngetStarted= findViewById(R.id.btnGet_Started);
         btnAnim= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.button_animation);
+        skip=findViewById(R.id.skip);
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         List<ScreenItem> mlist = new ArrayList<>();
         mlist.add( new ScreenItem("Welcome","Welcome to Your Friendly Chatbot",R.drawable.hichatbot));
