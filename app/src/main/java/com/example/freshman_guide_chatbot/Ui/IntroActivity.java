@@ -18,6 +18,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.freshman_guide_chatbot.R;
+import com.example.freshman_guide_chatbot.Ui.Registration.Login;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class IntroActivity extends AppCompatActivity {
         }catch (Exception e){
             if(restorePrefData())
             {
-                Intent mainAcitivity = new Intent(getApplicationContext(),NavigationActivity.class);
+                Intent mainAcitivity = new Intent(getApplicationContext(), Login.class);
                 startActivity(mainAcitivity);
                 finish();
             }
@@ -69,7 +70,7 @@ public class IntroActivity extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), NavigationActivity.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         });
@@ -137,7 +138,7 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent mainActivity = new Intent(getApplicationContext(),NavigationActivity.class);
+                Intent mainActivity = new Intent(getApplicationContext(),Login.class);
                 startActivity(mainActivity);
 
                 savePrefData();

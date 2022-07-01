@@ -44,21 +44,19 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;*/
 
-/*import com.chaquo.python.PyObject;
+import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.example.freshman_guide_chatbot.Ui.Registration.Login;
 import com.example.freshman_guide_chatbot.Ui.SplashScreen;
 import com.google.android.gms.common.internal.Constants;
-import com.google.android.gms.tasks.OnFailureListener;*/
+import com.google.android.gms.tasks.OnFailureListener;
 public class ChatFragment extends Fragment implements SAClickListener {
     private final int VOICE_REQUEST = 1999;
     private RecyclerView recyclerView;
     private MessageListAdapter userMessageListAdapter;
     private ImageButton send,voice;
     private EditText messageText;
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReference();
     /*OkHttpClient client;
     Request request;*/
     Message message;
@@ -87,9 +85,10 @@ public class ChatFragment extends Fragment implements SAClickListener {
             public void onClick(View v) {
                 message=new Message(messageText.getText().toString(),"user");
                 messageList.add(message);
-                userMessageListAdapter.notifyDataSetChanged();
                 messageText.setText("");
+                recyclerView.scrollToPosition(messageList.size()-1);
                 //post(message.getMessageText());
+                userMessageListAdapter.notifyDataSetChanged();
                 botResponse();
             }
         });
@@ -131,34 +130,25 @@ public class ChatFragment extends Fragment implements SAClickListener {
     }*/
     public void botResponse()
     {
-        /*PythonService pythonService=new PythonService();
+        PythonService pythonService=new PythonService();
         // call a function called main from hello.py
         PyObject response = pythonService.python_module.callAttr("response",message.getMessageText());
 
 
         if(response.equals("جدول"))
         {
-
-
-            storageRef.child("images/Timetable.pdf").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    message=new Message("اضغط هنا لتصل الي الجدول","bot",uri.toString());
-                    messageList.add(message);
-                    userMessageListAdapter.notifyDataSetChanged();
-                    recyclerView.scrollToPosition(messageList.size()-1);
-                }
-            });
-
+            message=new Message("اضغط هنا لتصل الي الجدول","bot",pythonService._uri);
+            messageList.add(message);
+            userMessageListAdapter.notifyDataSetChanged();
         }
 
         else {
             message = new Message(response.toString(), "bot");
             messageList.add(message);
             userMessageListAdapter.notifyDataSetChanged();
-            recyclerView.scrollToPosition(messageList.size()-1);
-        }*/
 
+        }
+        recyclerView.scrollToPosition(messageList.size()-1);
     }
 
     @Override

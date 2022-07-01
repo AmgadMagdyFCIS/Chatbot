@@ -58,7 +58,7 @@ public class Login extends AppCompatActivity {
             password.setText(getIntent().getExtras().getString("password", ""));
         } catch (Exception e) {
             if (fbUser != null) {
-                Intent intent = new Intent(getApplication(), IntroActivity.class);
+                Intent intent = new Intent(getApplication(), NavigationActivity.class);
                 // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
@@ -125,7 +125,7 @@ public class Login extends AppCompatActivity {
                         progressDialog.dismiss();
                         fbUser = fbAuth.getCurrentUser();
                         if (fbUser.isEmailVerified()) {
-                            Intent intent = new Intent(getApplication(), IntroActivity.class);
+                            Intent intent = new Intent(getApplication(), NavigationActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             Toast.makeText(getApplication(), "successful Login", Toast.LENGTH_LONG).show();

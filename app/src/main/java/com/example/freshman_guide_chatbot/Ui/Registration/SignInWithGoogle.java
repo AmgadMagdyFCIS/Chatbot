@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.freshman_guide_chatbot.R;
+import com.example.freshman_guide_chatbot.Ui.IntroActivity;
 import com.example.freshman_guide_chatbot.Ui.NavigationActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
