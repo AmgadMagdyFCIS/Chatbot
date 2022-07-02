@@ -120,7 +120,7 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
         // call a function called main from hello.py
         PyObject response = python_module.callAttr("response","سالي");
-        Toast.makeText(this,"Python is ready",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"أنا جاهز لمساعدتك",Toast.LENGTH_LONG).show();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
