@@ -6,8 +6,10 @@
     <string name="faculty_of_computer_science_is">Faculty Of Computer Science is :</string>
     <string name="what_is_computer_science">What is computer science?</string>
     <string name="whoAreWe">Who are we ?</string>
+    <string name="best_wishes">We hope you like it \nand wish you the best</string>
 
-    <string name="About_Us">   احنا خمس طلاب في كلية الحاسبات و المعلومات جامعة عين شمس \n كنا بنعاني في سنة اولي اننا مش بنلاقي مكاتب الدكاترة او المدرجات او حتي الجدول بتاعنا بسهولة , فقررنا اننا نساعد اللي هيبقوا زينا في يوم من الايام كمشروع للتخرج بتاعنا \n ال chatbot بتاعنا هيساعدك تعرف كل ده و هيرد عليك لما تسألوا </string>
+    <string name="About_Us">  We were students like you in the Faculty of CS. We faced a lot of problems in our freshman year, So we decided to create this app to help you navigate through the faculty\'s campus without running into the same issues we faced.
+ </string>
 
 
 </resources>
