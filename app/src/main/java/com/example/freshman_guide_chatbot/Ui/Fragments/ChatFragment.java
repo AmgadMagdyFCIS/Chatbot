@@ -63,7 +63,7 @@ public class ChatFragment extends Fragment implements SAClickListener {
     /*OkHttpClient client;
     Request request;*/
     Message message;
-    ArrayList<Message> messageList,temp;
+    ArrayList<Message> messageList;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,7 +75,6 @@ public class ChatFragment extends Fragment implements SAClickListener {
         voice=view.findViewById(R.id.search_voice_btn_);
 
         messageList=new ArrayList<>();
-        temp=new ArrayList<>();
         message=new Message("مرحبا كيف يمكنني مساعدتك؟","bot");
         messageList.add(message);
 
