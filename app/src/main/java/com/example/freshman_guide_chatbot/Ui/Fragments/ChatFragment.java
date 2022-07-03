@@ -136,10 +136,6 @@ public class ChatFragment extends Fragment implements SAClickListener {
     }*/
     void notifyData()
     {
-        temp.addAll(messageList);
-        messageList.clear();
-        messageList.addAll(temp);
-        temp.clear();
         userMessageListAdapter.notifyDataSetChanged();
     }
     public void botResponse()
