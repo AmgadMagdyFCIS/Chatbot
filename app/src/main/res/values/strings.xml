@@ -7,7 +7,8 @@
     <string name="what_is_computer_science">What is computer science?</string>
     <string name="whoAreWe">Who are we ?</string>
     <string name="best_wishes">We hope you like it \nand wish you the best</string>
-
+    <!--<string name="default_web_client_id" translatable="false">831367515508-s1maknpj58ueidn1irh5q03oec5mishi.apps.googleusercontent.com</string>
+-->
     <string name="About_Us">  We were students like you in the Faculty of CS. We faced a lot of problems in our freshman year, So we decided to create this app to help you navigate through the faculty\'s campus without running into the same issues we faced.
  </string>
 

@@ -19,7 +19,9 @@ import android.widget.Toast;
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
+
 import com.example.freshman_guide_chatbot.R;
+
 import com.example.freshman_guide_chatbot.Ui.Fragments.AboutUsFragment;
 import com.example.freshman_guide_chatbot.Ui.Fragments.ChatFragment;
 import com.example.freshman_guide_chatbot.Ui.Fragments.InformationFragment;

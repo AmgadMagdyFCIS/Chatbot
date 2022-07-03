@@ -68,8 +68,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage'
     //implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
+
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
     implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    apply plugin: 'com.google.gms.google-services'
 
 
 
