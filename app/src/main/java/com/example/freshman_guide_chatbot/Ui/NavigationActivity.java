@@ -54,12 +54,17 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
     GoogleSignInClient GoogleClient;
     private static final int RC_SIGN_IN = 101;
 
+    String nav="";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
 
+        try {
+            nav=getIntent().getExtras().getString("nav","");
+
+        }catch (Exception e){}
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.nav);
         navigationView.setNavigationItemSelectedListener(this);
@@ -75,27 +80,35 @@ public class NavigationActivity extends AppCompatActivity implements NavigationV
 
         fragmentManager = getSupportFragmentManager();
 
-        final dialog loadingdialog = new dialog(this);
-        loadingdialog.startLoadingdialog();
+        if(nav.equals("nav"))
+        {
+            fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.add(R.id.container, new ChatFragment());
+            fragmentTransaction.commit();
+        }
+        else {
+            final dialog loadingdialog = new dialog(this);
+            loadingdialog.startLoadingdialog();
 
 
-        // using handler class to set time delay methods
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+            // using handler class to set time delay methods
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
-                // after 4 seconds
-                waiting();
-                loadingdialog.dismissdialog();
-                fragmentTransaction = fragmentManager.beginTransaction();
+                @Override
+                public void run() {
+                    // after 4 seconds
+                    waiting();
+                    loadingdialog.dismissdialog();
+                    fragmentTransaction = fragmentManager.beginTransaction();
 
-                fragmentTransaction.add(R.id.container, new ChatFragment());
-                fragmentTransaction.commit();
-            }
+                    fragmentTransaction.add(R.id.container, new ChatFragment());
+                    fragmentTransaction.commit();
+                }
 
-        }, 4000); // 4 seconds
-
+            }, 4000); // 4 seconds
+        }
     }
 
     void waiting()

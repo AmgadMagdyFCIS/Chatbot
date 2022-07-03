@@ -21,7 +21,7 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
         python {
-            buildPython "C:/Users/tech3/AppData/Local/Programs/Python/Python310/python.exe"
+            buildPython "C:/Users/LENOVO/AppData/Local/Programs/Python/Python310/python.exe"
             pip {
                 install "tensorflow"
                 install "keras"

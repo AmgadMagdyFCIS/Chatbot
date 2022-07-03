@@ -61,6 +61,7 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(getApplication(), NavigationActivity.class);
                 // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                finish();
 
             }
         }
@@ -128,6 +129,7 @@ public class Login extends AppCompatActivity {
                             Intent intent = new Intent(getApplication(), NavigationActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
+                            finish();
                             Toast.makeText(getApplication(), "successful Login", Toast.LENGTH_LONG).show();
                         } else
                             Toast.makeText(getApplication(), "please verify your email", Toast.LENGTH_LONG).show();

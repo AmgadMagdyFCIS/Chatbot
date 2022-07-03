@@ -59,10 +59,11 @@ public class ChatFragment extends Fragment implements SAClickListener {
     private ImageButton send,voice;
     private EditText messageText;
 
+
     /*OkHttpClient client;
     Request request;*/
     Message message;
-    ArrayList<Message> messageList;
+    ArrayList<Message> messageList,temp;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,6 +75,7 @@ public class ChatFragment extends Fragment implements SAClickListener {
         voice=view.findViewById(R.id.search_voice_btn_);
 
         messageList=new ArrayList<>();
+        temp=new ArrayList<>();
         message=new Message("مرحبا كيف يمكنني مساعدتك؟","bot");
         messageList.add(message);
 
@@ -87,11 +89,13 @@ public class ChatFragment extends Fragment implements SAClickListener {
             public void onClick(View v) {
                 message=new Message(messageText.getText().toString(),"user");
                 messageList.add(message);
+
                 messageText.setText("");
                 recyclerView.scrollToPosition(messageList.size()-1);
+                notifyData();
                 //post(message.getMessageText());
-                userMessageListAdapter.notifyDataSetChanged();
                 botResponse();
+                notifyData();
             }
         });
 
@@ -130,6 +134,14 @@ public class ChatFragment extends Fragment implements SAClickListener {
         });
 
     }*/
+    void notifyData()
+    {
+        temp.addAll(messageList);
+        messageList.clear();
+        messageList.addAll(temp);
+        temp.clear();
+        userMessageListAdapter.notifyDataSetChanged();
+    }
     public void botResponse()
     {
         //PythonService pythonService=new PythonService();
@@ -141,16 +153,23 @@ public class ChatFragment extends Fragment implements SAClickListener {
         {
             message=new Message("اضغط هنا لتصل الي الجدول","bot",NavigationActivity._uri);
             messageList.add(message);
-            userMessageListAdapter.notifyDataSetChanged();
+
+
         }
 
         else {
             message = new Message(response.toString(), "bot");
             messageList.add(message);
-            userMessageListAdapter.notifyDataSetChanged();
-
         }
+
         recyclerView.scrollToPosition(messageList.size()-1);
+
+        /*if(messageList.size()==9)
+        {
+            messageList.clear();
+            message=new Message(message.getMessageText(),"bot");
+            messageList.add(message);
+        }*/
     }
 
     @Override

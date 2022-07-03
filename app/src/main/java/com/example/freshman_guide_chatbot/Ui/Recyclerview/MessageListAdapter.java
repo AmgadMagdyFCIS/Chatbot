@@ -14,7 +14,7 @@ import com.google.firebase.installations.Utils;
 
 import java.util.List;
 
-public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.MyViewHolder> {
+public class MessageListAdapter extends  RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private List<Message> messages;
@@ -28,28 +28,40 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         /*if(messages.size()>1)
             index = messages.size() - 2;*/
 
-        index=0;
+        index=-1;
         this.sAClickListener=sAClickListener;
 
 
     }
 
-    @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        if (messages.get(index).getSender().equals("user"))
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_query, parent, false);
+    public int getItemViewType(int position) {
+        return position%2 ;
+    }
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if(viewType==0)
+            return new BotViewHolder0(LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_query, parent, false));
         else
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_query, parent, false);
-
-        return new MyViewHolder(view);
+            return new UserViewHolder1(LayoutInflater.from(parent.getContext()).inflate(R.layout.user_query, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+
         Message message = messages.get(position);
-        holder.messageText.setText(message.getMessageText());
+        switch (holder.getItemViewType()) {
+            case 0:
+                BotViewHolder0 botViewHolder0 = (BotViewHolder0)holder;
+                botViewHolder0.messageText.setText(message.getMessageText());
+                break;
+
+            case 1:
+                UserViewHolder1 userViewHolder1 = (UserViewHolder1)holder;
+                userViewHolder1.messageText.setText(message.getMessageText());
+                break;
+        }
+
     }
 
     @Override
@@ -57,28 +69,31 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         return messages.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    class BotViewHolder0 extends RecyclerView.ViewHolder {
         TextView messageText;
-
-        public MyViewHolder(@NonNull View itemView) {
+        public BotViewHolder0(@NonNull View itemView){
             super(itemView);
-            if (messages.get(index).getSender().equals("user"))
-                messageText = (TextView) itemView.findViewById(R.id.my_message);
-            else {
-                messageText = (TextView) itemView.findViewById(R.id.bot_message);
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (getAdapterPosition() != -1) {
-                            sAClickListener.onRecyclerViewClick(getAdapterPosition());
-                        }
+            messageText = (TextView) itemView.findViewById(R.id.bot_message);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (getAdapterPosition() != -1) {
+                        sAClickListener.onRecyclerViewClick(getAdapterPosition());
                     }
-                });
-            }
-            index++;
-
+                }
+            });
         }
     }
+
+    class UserViewHolder1 extends RecyclerView.ViewHolder {
+        TextView messageText;
+
+        public UserViewHolder1(@NonNull View itemView) {
+            super(itemView);
+            messageText = (TextView) itemView.findViewById(R.id.my_message);
+        }
+    }
+
 
 
 }

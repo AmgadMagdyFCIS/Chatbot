@@ -33,6 +33,7 @@ public class IntroActivity extends AppCompatActivity {
     int position;
     TextView skip;
     Animation btnAnim;
+    String nav="";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,7 +43,7 @@ public class IntroActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         try {
-            String nav=getIntent().getExtras().getString("nav");
+            nav=getIntent().getExtras().getString("nav","");
 
         }catch (Exception e){
             if(restorePrefData())
@@ -70,8 +71,18 @@ public class IntroActivity extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
+                Intent intent;
+                if(nav.equals("nav"))
+                {
+                    intent = new Intent(getApplicationContext(), NavigationActivity.class);
+                    intent.putExtra("nav",nav);
+                }
+                else {
+                    intent = new Intent(getApplicationContext(), Login.class);
+                }
                 startActivity(intent);
+                savePrefData();
+                finish();
             }
         });
 
@@ -138,9 +149,16 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent mainActivity = new Intent(getApplicationContext(),Login.class);
-                startActivity(mainActivity);
-
+                Intent intent;
+                if(nav.equals("nav"))
+                {
+                    intent = new Intent(getApplicationContext(), NavigationActivity.class);
+                    intent.putExtra("nav",nav);
+                }
+                else {
+                    intent = new Intent(getApplicationContext(), Login.class);
+                }
+                startActivity(intent);
                 savePrefData();
                 finish();
 
