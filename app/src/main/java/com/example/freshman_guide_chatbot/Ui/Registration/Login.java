@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,8 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.freshman_guide_chatbot.R;
-import com.example.freshman_guide_chatbot.Ui.IntroActivity;
-import com.example.freshman_guide_chatbot.Ui.NavigationActivity;
+import com.example.freshman_guide_chatbot.Ui.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -58,7 +55,7 @@ public class Login extends AppCompatActivity {
             password.setText(getIntent().getExtras().getString("password", ""));
         } catch (Exception e) {
             if (fbUser != null) {
-                Intent intent = new Intent(getApplication(), NavigationActivity.class);
+                Intent intent = new Intent(getApplication(), MainActivity.class);
                 // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
@@ -126,7 +123,7 @@ public class Login extends AppCompatActivity {
                         progressDialog.dismiss();
                         fbUser = fbAuth.getCurrentUser();
                         if (fbUser.isEmailVerified()) {
-                            Intent intent = new Intent(getApplication(), NavigationActivity.class);
+                            Intent intent = new Intent(getApplication(), MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                             finish();

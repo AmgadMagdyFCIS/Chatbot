@@ -8,8 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.freshman_guide_chatbot.R;
-import com.example.freshman_guide_chatbot.Ui.IntroActivity;
-import com.example.freshman_guide_chatbot.Ui.NavigationActivity;
+import com.example.freshman_guide_chatbot.Ui.MainActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -108,7 +107,7 @@ public class SignInWithGoogle extends Login
 
     private void updateUI(Object o)
     {
-        Intent intent = new Intent(getApplication(), NavigationActivity.class);
+        Intent intent = new Intent(getApplication(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

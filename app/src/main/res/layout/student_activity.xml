@@ -8,5 +8,6 @@
         android:id="@+id/image_SA"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:padding="10dp"
         app:srcCompat="@drawable/acm" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,40 +2,28 @@ package com.example.freshman_guide_chatbot.Ui.Fragments;
 
 import static android.app.Activity.RESULT_OK;
 
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.URLUtil;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.freshman_guide_chatbot.R;
-import com.example.freshman_guide_chatbot.Ui.NavigationActivity;
-import com.example.freshman_guide_chatbot.Ui.PythonService;
+import com.example.freshman_guide_chatbot.Ui.MainActivity;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.Message;
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.MessageListAdapter;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+
 import com.example.freshman_guide_chatbot.Ui.Recyclerview.SAClickListener;
 /*import okhttp3.Call;
 import okhttp3.Callback;
@@ -46,12 +34,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;*/
 
 import com.chaquo.python.PyObject;
-import com.chaquo.python.Python;
-import com.chaquo.python.android.AndroidPlatform;
-import com.example.freshman_guide_chatbot.Ui.Registration.Login;
-import com.example.freshman_guide_chatbot.Ui.SplashScreen;
-import com.google.android.gms.common.internal.Constants;
-import com.google.android.gms.tasks.OnFailureListener;
+
 public class ChatFragment extends Fragment implements SAClickListener {
     private final int VOICE_REQUEST = 1999;
     private RecyclerView recyclerView;
@@ -75,7 +58,7 @@ public class ChatFragment extends Fragment implements SAClickListener {
         voice=view.findViewById(R.id.search_voice_btn_);
 
         messageList=new ArrayList<>();
-        message=new Message("مرحبا كيف يمكنني مساعدتك؟","bot");
+        message=new Message("مرحبا كيف يمكنني مساعدتك؟");
         messageList.add(message);
 
 
@@ -86,7 +69,7 @@ public class ChatFragment extends Fragment implements SAClickListener {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                message=new Message(messageText.getText().toString(),"user");
+                message=new Message(messageText.getText().toString());
                 messageList.add(message);
 
                 messageText.setText("");
@@ -141,12 +124,12 @@ public class ChatFragment extends Fragment implements SAClickListener {
     {
         //PythonService pythonService=new PythonService();
         // call a function called main from hello.py
-        PyObject response = NavigationActivity.python_module.callAttr("response",message.getMessageText());
+        PyObject response = MainActivity.python_module.callAttr("response",message.getMessageText());
 
 
         if(response.equals("جدول"))
         {
-            message=new Message("اضغط هنا لتصل الي الجدول","bot",NavigationActivity._uri);
+            message=new Message("اضغط هنا لتصل الي الجدول", MainActivity._uri);
             messageList.add(message);
 
 

@@ -12,11 +12,6 @@
         android:theme="@style/Theme.Freshman_guide_chatbot">
 
 
-        <service
-            android:name=".Ui.PythonService"
-            android:enabled="true"
-            android:exported="false" />
-
         <activity
             android:name=".Ui.SplashScreen"
             android:exported="true"
@@ -31,7 +26,7 @@
             android:name=".Ui.IntroActivity"
             android:exported="false" />
         <activity
-            android:name=".Ui.NavigationActivity"
+            android:name=".Ui.MainActivity"
             android:exported="false" />
         <activity
             android:name=".Ui.Registration.SignInWithGoogle"
@@ -44,9 +39,6 @@
             android:exported="false" />
         <activity
             android:name=".Ui.Registration.Sign_Up"
-            android:exported="false" />
-        <activity
-            android:name=".Ui.MainActivity"
             android:exported="false" />
 
         <meta-data

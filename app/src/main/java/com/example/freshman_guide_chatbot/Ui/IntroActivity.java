@@ -1,7 +1,6 @@
 package com.example.freshman_guide_chatbot.Ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
@@ -13,8 +12,6 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.freshman_guide_chatbot.R;
@@ -74,7 +71,7 @@ public class IntroActivity extends AppCompatActivity {
                 Intent intent;
                 if(nav.equals("nav"))
                 {
-                    intent = new Intent(getApplicationContext(), NavigationActivity.class);
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("nav",nav);
                 }
                 else {
@@ -152,7 +149,7 @@ public class IntroActivity extends AppCompatActivity {
                 Intent intent;
                 if(nav.equals("nav"))
                 {
-                    intent = new Intent(getApplicationContext(), NavigationActivity.class);
+                    intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("nav",nav);
                 }
                 else {
